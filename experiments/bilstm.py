@@ -3,8 +3,8 @@ from typing import Dict, Type
 from src.datasets.generation.base import BaseDataset
 from src.datasets.generation.tl import EnWiki, ItWiki, FrWiki
 from src.datasets.generation.nc import RCV1en, RCV2it, RCV2fr
-from src.models.keras_bonanza.keras_handler import KerasScript
-from src.models.keras_bonanza.models import (RevisedBiLSTM)
+from src.models.bilstms.keras_handler import KerasScript
+from src.models.bilstms.models import (RevisedBiLSTM)
 from utils.general import load_yaml
 
 

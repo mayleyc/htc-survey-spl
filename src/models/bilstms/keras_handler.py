@@ -11,8 +11,8 @@ import tensorflow as tf
 from src.datasets.generation.nc import RCV2it, RCV2fr, RCV1en
 from src.datasets.generation.tl import ItWiki, EnWiki, FrWiki
 from src.datasets.generation.base import BaseDataset
-from src.models.keras_bonanza.keras_utils import preprocess_text, get_data, to_tokenized_tensors
-from src.models.keras_bonanza.models import (DPCNN, RevisedBiLSTM, RNNCNN, BaseKerasModel)
+from src.models.bilstms.keras_utils import preprocess_text, get_data, to_tokenized_tensors
+from src.models.bilstms.models import (DPCNN, RevisedBiLSTM, RNNCNN, BaseKerasModel)
 from utils.embeddings import load_vectors
 from utils.general import load_yaml
 

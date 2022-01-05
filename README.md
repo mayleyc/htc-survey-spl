@@ -1,13 +1,9 @@
 # dsi-nlp-publib
 
-Code used for experiments in papers:
-
-- Gasparetto, A.; Marcuzzo, M.; Zangari, A.; Albarelli, A. (2021) A multilingual perspective on existing text
-  classification methods. _PLOS ONE_ (in review)
-- Gasparetto, A.; Marcuzzo, M.; Zangari, A.; Albarelli, A. (2022) A Survey on Text Classification Algorithms:
-  from Text to Predictions. _Information_ (in review)
-
-The following sections describe how to reproduce reported results.
+Text Classification experimentation code. Includes reproduction instructions for
+- Classical methods (SVM, NB);
+- Neural based methods (FastText, XMLCNN, BiLSTMs);
+- Transformer based methods.
 
 ## Installation
 

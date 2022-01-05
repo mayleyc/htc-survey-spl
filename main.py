@@ -8,7 +8,7 @@ from utils.run_handler import TransformerScript
 
 # DESIRED DATASET MUST BE SELECTED HERE
 # dataset = ItWiki
-from src.models.keras_bonanza.keras_utils import get_data
+from src.models.bilstms.keras_utils import get_data
 import numpy as np
 
 
