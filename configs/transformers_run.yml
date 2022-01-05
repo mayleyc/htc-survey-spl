@@ -1,0 +1,26 @@
+---
+TRAIN: true
+TEST: true
+RELOAD: false
+TRAIN_BATCH_SIZE: 4
+TEST_BATCH_SIZE: 8
+LEARNING_RATE: 1.5e-5
+EPOCHS: 4
+MAP_STYLE: false
+LOSS_REDUCTION: mean
+METRIC_AVERAGE: macro
+SUBSET_ACCURACY: true
+TENSORBOARD_TRAIN: false
+TENSORBOARD_EVAL: false
+TENSORBOARD_NAME: ''
+ES_PARAMS:
+  patience: 1
+  metrics: F1
+  metrics_trend: increasing
+DEVICE: cuda
+# Checkpoint settings, final checkpoints' path will be: {MODELS_PATH}/"dataset_name"/{RUN_NAME}/{CHECKPOINT_NAME}
+# If reload=true, make sure the correct path and names are set here
+MODELS_PATH: dumps  # checkpoint root folder
+RUN_NAME: xlm-r # string or number, will save checkpoints in a folder with this name
+CHECKPOINT_NAME: xlm-r.pt  # file name of the checkpoint
+DATASET_NAME: itwiki-1 # name of folder with generated splits (path will be data/generated/{DATASET_NAME})

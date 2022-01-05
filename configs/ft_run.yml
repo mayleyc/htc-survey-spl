@@ -1,0 +1,10 @@
+---
+TRAIN: true
+TEST: true
+RELOAD: false
+TUNING_TIME: 1800 # seconds
+# Checkpoint settings, final checkpoints' path will be: {MODELS_PATH}/"dataset_name"/{CHECKPOINT_NAME}
+# If reload=true, make sure the correct path and names are set here
+MODELS_PATH: dumps  # checkpoint root folder
+CHECKPOINT_NAME: fasttext_30.bin  # file name of the checkpoint
+DATASET_NAME: enwiki # name of folder with generated splits (path will be data/generated/{DATASET_NAME})

@@ -1,0 +1,26 @@
+AVAILABLE_MODELS:
+  # multilingual
+  - xlm-roberta-base
+  - bert-base-multilingual-cased
+  - xlm-roberta-large # too big ?
+  # italian
+  - dbmdz/bert-base-italian-xxl-cased # bert
+  - dbmdz/electra-base-italian-xxl-cased-discriminator # electra
+  - Musixmatch/umberto-commoncrawl-cased-v1 # camembert
+  - idb-ita/gilberto-uncased-from-camembert # camembert
+  - LorenzoDeMattei/GePpeTto # GPT-2
+  - indigo-ai/BERTino
+  - m-polignano-uniba/bert_uncased_L-12_H-768_A-12_italian_alb3rt0
+  # - MilaNLProc/feel-it-italian-sentiment FINE-TUNED on SA
+  # french
+  - flaubert/flaubert_base_cased
+  - camembert/camembert-base-wikipedia-4gb # and friends, 5 more
+  - moussaKam/mbarthez # (also large)
+  # - BaptisteDoyen/camembert-base-xnli ZERO SHOT TOPIC CLASS
+  # english
+  - bert-base-cased
+  - roberta-base
+
+SELECTED_MODEL: 0 # index of model to be used
+CLASSIFIER_CONF:
+  freeze_base: false

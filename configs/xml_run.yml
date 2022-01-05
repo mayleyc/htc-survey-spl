@@ -1,0 +1,27 @@
+---
+TRAIN: true
+TEST: true
+RELOAD: false
+MAP_STYLE: false
+TRAIN_BATCH_SIZE: 64
+TEST_BATCH_SIZE: 128
+LEARNING_RATE: 2.0e-4
+WEIGHT_DECAY: 1.0e-2
+EPOCHS: 20
+LOSS_REDUCTION: mean
+METRIC_AVERAGE: macro
+SUBSET_ACCURACY: true
+TENSORBOARD_TRAIN: false
+TENSORBOARD_EVAL: false
+TENSORBOARD_NAME: ''
+ES_PARAMS:
+  patience: 2
+  metrics: F1
+  metrics_trend: increasing
+DEVICE: cuda
+# Checkpoint settings, final checkpoints' path will be: {MODELS_PATH}/"dataset_name"/{RUN_NAME}/{CHECKPOINT_NAME}
+# If reload=true, make sure the correct path and names are set here
+MODELS_PATH: dumps  # checkpoint root folder
+RUN_NAME: xml-cnn-3 # string or number, will save checkpoints in a folder with this name
+CHECKPOINT_NAME: xml-cnn.pt  # file name of the checkpoint
+DATASET_NAME: itwiki-3 # name of folder with generated splits (path will be data/generated/{DATASET_NAME})

@@ -1,0 +1,28 @@
+---
+LOGGING: true
+BATCH_SIZE: 64
+LEARNING_RATE: 0.0005
+EPOCHS: 30
+PREPROCESS: true
+LOAD_EMBEDDINGS: true
+# ***** Generic settings *****
+# Max number of words
+MAX_SEQUENCE_LENGTH: 512
+# AKA max features
+MAX_NB_WORDS: 240000
+# ***** Embedding selection *****
+EMBEDDING_PATH:
+  italian: "data/embeddings/multilingual_embeddings.it"
+  french: "data/embeddings/multilingual_embeddings.fr"
+  english: "data/embeddings/glove.6B.300d.txt"
+# ***** Embedding-specific *****
+# Only applies to gensim embeddings
+MAX_VOCABULARY: 100000
+# Only applies to FastText embeddings
+MAX_FT_VECS: 500000
+# Only applies to embeddings trained from scratch
+EMBEDDING_DIM: 300
+# Only applies to imported embeddings
+WEIGHTS_TRAINABLE: true
+CUDA: true
+DATASET_NAME: frwiki-3 # name of folder with generated splits (path will be data/generated/{DATASET_NAME})

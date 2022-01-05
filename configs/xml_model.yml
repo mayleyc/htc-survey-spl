@@ -1,0 +1,12 @@
+---
+CLASSIFIER_CONF:
+  output_channel: 32
+  num_bottleneck_hidden: 512
+  dynamic_pool_length: 32
+  dropout: 0.5
+  mode: multichannel # rand static non-static multichannel
+EMBEDDINGS:
+  italian: "data/embeddings/cc.it.300.vec.gz"
+  french: "data/embeddings/cc.fr.300.vec.gz"
+  english: "data/embeddings/cc.en.300.vec.gz"
+MAX_VECTORS: 500000 # max number of words to be loaded from the embedding file
