@@ -170,17 +170,16 @@ Create and activate this environment, then train with `experiments/bilstm.py` an
 
 If you find this code or the provided data useful in your research, please consider citing:
 
-``
-   @Article{info13020083,
-   AUTHOR = {Gasparetto, Andrea and Marcuzzo, Matteo and Zangari, Alessandro and Albarelli, Andrea},
-   TITLE = {A Survey on Text Classification Algorithms: From Text to Predictions},
-   JOURNAL = {Information},
-   VOLUME = {13},
-   YEAR = {2022},
-   NUMBER = {2},
-   ARTICLE-NUMBER = {83},
-   URL = {https://www.mdpi.com/2078-2489/13/2/83},
-   ISSN = {2078-2489},
-   DOI = {10.3390/info13020083}
-   }
-}``
+
+    @Article{info13020083,
+    AUTHOR = {Gasparetto, Andrea and Marcuzzo, Matteo and Zangari, Alessandro and Albarelli, Andrea},
+    TITLE = {A Survey on Text Classification Algorithms: From Text to Predictions},
+    JOURNAL = {Information},
+    VOLUME = {13},
+    YEAR = {2022},
+    NUMBER = {2},
+    ARTICLE-NUMBER = {83},
+    URL = {https://www.mdpi.com/2078-2489/13/2/83},
+    ISSN = {2078-2489},
+    DOI = {10.3390/info13020083}
+    }
