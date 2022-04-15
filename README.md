@@ -1,6 +1,11 @@
 # dsi-nlp-publib
 
-Text Classification experimentation code. Includes reproduction instructions for
+Code used for experiments in papers:
+
+    Gasparetto, A.; Marcuzzo, M.; Zangari, A.; Albarelli, A. (2021) A survey on text classification: practical perspectives on the Italian language. PLOS ONE (in review)
+    Gasparetto, A.; Marcuzzo, M.; Zangari, A.; Albarelli, A. (2022) A Survey on Text Classification Algorithms: from Text to Predictions. Information https://doi.org/10.3390/info13020083
+
+Includes reproduction instructions for
 - Classical methods (SVM, NB);
 - Neural based methods (FastText, XMLCNN, BiLSTMs);
 - Transformer based methods.
@@ -160,3 +165,22 @@ Create and activate this environment, then train with `experiments/bilstm.py` an
 - Matteo Marcuzzo, Department of Management, Ca' Foscari University, Venice, Italy
 - Andrea Albarelli, Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice,
   Italy
+
+## Citing this work
+
+If you find this code or the provided data useful in your research, please consider citing:
+
+``
+   @Article{info13020083,
+   AUTHOR = {Gasparetto, Andrea and Marcuzzo, Matteo and Zangari, Alessandro and Albarelli, Andrea},
+   TITLE = {A Survey on Text Classification Algorithms: From Text to Predictions},
+   JOURNAL = {Information},
+   VOLUME = {13},
+   YEAR = {2022},
+   NUMBER = {2},
+   ARTICLE-NUMBER = {83},
+   URL = {https://www.mdpi.com/2078-2489/13/2/83},
+   ISSN = {2078-2489},
+   DOI = {10.3390/info13020083}
+   }
+}``
