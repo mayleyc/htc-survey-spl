@@ -1,4 +1,4 @@
-# dsi-nlp-publib
+# Text Classification survey
 
 Code used for experiments in papers:
 

@@ -1,6 +1,9 @@
-# ticket-classification
+# Ticket Automation survey with Applications
 
-A set of baselines and experiments for automatic classification of support tickets
+Code used in paper: 
+
+Zangari A, Marcuzzo M, Schiavinato M, Gasparetto A, Albarelli A. (2022) Ticket Automation: an Insight into Current Research with Applications to Multi-level Classification
+      Scenarios. (In review)
 
 ## Datasets download
 
@@ -78,4 +81,12 @@ You need the SVM environment set up.
 - `src/analysis` contains scripts to analyze the distribution of values in BERT embeddings;
 - `src/model_evaluation` defines functions used to compute metrics;
 - `src/models` contains the implementation of all the models we tested;
-- `src/utils` defines some preprocessing functions and utilities to train PyTorch models. 
+- `src/utils` defines some preprocessing functions and utilities to train PyTorch models.
+
+## Citing this work
+
+If you find this code or the provided data useful in your research, please consider citing:
+
+```
+   To be added after publication.
+```
