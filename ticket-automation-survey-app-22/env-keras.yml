@@ -1,0 +1,21 @@
+name: ticket-class-keras
+channels:
+  - pytorch
+  - huggingface
+  - conda-forge
+  - defaults
+dependencies:
+  - gensim=4.2.0
+  - matplotlib-base=3.4.3
+  - nltk=3.6.7
+  - numpy=1.22.3
+  - pandas=1.4.2
+  - pip=21.2.4
+  - python=3.10.4
+  - scikit-learn=1.1.1
+  - seaborn=0.11.2
+  - tensorflow=2.8.1
+  - tqdm=4.64.0
+  - yaml=0.2.5
+  - pip:
+      - pyyaml==6.0

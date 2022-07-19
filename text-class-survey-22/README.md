@@ -2,10 +2,11 @@
 
 Code used for experiments in papers:
 
- - Gasparetto A, Marcuzzo M, Zangari A, Albarelli A. (2022) A Survey on Text Classification Algorithms: From Text to Predictions. _Information_ 13, no. 2: 83. https://doi.org/10.3390/info13020083 
-  - Gasparetto A, Zangari A, Marcuzzo M, Albarelli A. (2022) A survey on text classification: Practical perspectives on the Italian language. _PLOS ONE_ 17(7): e0270904. https://doi.org/10.1371/journal.pone.0270904 
+- Gasparetto A, Marcuzzo M, Zangari A, Albarelli A. (2022) A Survey on Text Classification Algorithms: From Text to Predictions. _Information_ 13, no. 2: 83. https://doi.org/10.3390/info13020083
+- Gasparetto A, Zangari A, Marcuzzo M, Albarelli A. (2022) A survey on text classification: Practical perspectives on the Italian language. _PLOS ONE_ 17(7): e0270904. https://doi.org/10.1371/journal.pone.0270904
 
 Includes reproduction instructions for
+
 - Classical methods (SVM, NB);
 - Neural based methods (FastText, XMLCNN, BiLSTMs);
 - Transformer based methods.
@@ -42,7 +43,7 @@ In the case of Wikipedia articles, datasets are provided in a Google Drive folde
 3. Download pretrained embeddings as described [below](#download-embeddings);
 4. Generate training and testing splits as described [below](#dataset-generation) (only step 5 and 3 for Wikipedia and
    RCV* respectively);
-    1. The provided Wikipedia datasets include the list of 100 topics we used. To change the number of topics see step 4. 
+    1. The provided Wikipedia datasets include the list of 100 topics we used. To change the number of topics see step 4.
 5. Train models and test them as described [here](#usage-example).
 
 ## Dataset generation
@@ -60,15 +61,16 @@ This section describes how to generate datasets from raw Wikipedia dumps and RCV
     - E.g. `python utils/wikiextractor/WikiExtractor.py {dump_archive_path} --json -o {output_folder}`;
     - We use `data/raw/{lang}wiki/extracted` as output folder.
 4. (Optional) You may choose to define the topics to be kept, which defaults to 100;
-   1. You may run `utils/visualization.py` to obtain a bar plot of article/topic frequency;
-   2. You may then set appropriate parameters to adjust as desired.
-5. 
-   **(Option a).** Generate an individual split using `python src/datasets/generation/tl/{language}wiki.py`.
+    1. You may run `utils/visualization.py` to obtain a bar plot of article/topic frequency;
+    2. You may then set appropriate parameters to adjust as desired.
+5.
 
-   **(Option b).**  Generate splits using `python src/datasets/generation/generate_all.py`. To speed up the 
-   process, this file expects all datasets to be present; if this is not the case, manual editing is required. 
-   By default, this will create 4 stratified splits for each dump and limit the maximum number of
-   documents per label to 50000. **This will also create RCV1/2 splits**.
+**(Option a).** Generate an individual split using `python src/datasets/generation/tl/{language}wiki.py`.
+
+**(Option b).**  Generate splits using `python src/datasets/generation/generate_all.py`. To speed up the
+process, this file expects all datasets to be present; if this is not the case, manual editing is required.
+By default, this will create 4 stratified splits for each dump and limit the maximum number of
+documents per label to 50000. **This will also create RCV1/2 splits**.
 
 After these steps the generated datasets will appear in the `/data/generated` folder with the following structure:
 
@@ -88,26 +90,27 @@ After these steps the generated datasets will appear in the `/data/generated` fo
 ```
 
 Files contain 1 document in every line, prepended with the topics in FastText format (
-e.g. `__label__{topic1} __label__{topic2} document`). For more information on this format, 
+e.g. `__label__{topic1} __label__{topic2} document`). For more information on this format,
 visit the following page: https://fasttext.cc/docs/en/supervised-tutorial.html#getting-and-preparing-the-data.
 
 ### RCV1 - RCV2 (news categorization)
 
 1. Request datasets here: https://trec.nist.gov/data/reuters/reuters.html;
-   1. Datasets are provided in zipped `.tar.xz` archives.
+    1. Datasets are provided in zipped `.tar.xz` archives.
 2. Unzip them in `data/raw/rcv2{lang}/{language}` (e.g. `data/raw/rcv2it/italian` contains the italian articles
    contained in RCV2);
-   1. Articles are divided in arbitrary folders (e.g. Italian has 15 folders, `REUTIT1` to `REUTIT15`);
-   2. Folders contain `.xml` files, each of which represents a single article;
+    1. Articles are divided in arbitrary folders (e.g. Italian has 15 folders, `REUTIT1` to `REUTIT15`);
+    2. Folders contain `.xml` files, each of which represents a single article;
 3. **(Option a).** Generate an individual split using `python/datasets/generation/nc/rcv2.py`.
-   This will process the articles from the raw extracted dump. The processed `.xml` 
-   files are saved as a `.pkl` pickle file to avoid having to re-process them each time a split is created. 
+   This will process the articles from the raw extracted dump. The processed `.xml`
+   files are saved as a `.pkl` pickle file to avoid having to re-process them each time a split is created.
    Pickle files are automatically saved in `data/raw/rcv2{lang}/{language}/PICKLE`.
-   
+
    **(Option b).** You may also generate all splits at the same time, as per step 5.b above.
+
 ## Download embeddings
 
-Some methods, like XML-CNN and BiLSTMs, require pretrained embeddings. These may be downloaded 
+Some methods, like XML-CNN and BiLSTMs, require pretrained embeddings. These may be downloaded
 from the following sources, which should then be placed in `data/embeddings/`:
 
 - FastText (multi): https://fasttext.cc/docs/en/crawl-vectors.html
@@ -116,8 +119,8 @@ from the following sources, which should then be placed in `data/embeddings/`:
 
 ## Usage example
 
-This example describes how to train and test classical methods and 
-HuggingFace :hugs: Transformers. The procedure is similar for Neural Network based models. 
+This example describes how to train and test classical methods and
+HuggingFace :hugs: Transformers. The procedure is similar for Neural Network based models.
 In general, to train and test on different datasets one must:
 
 1. Change the dataset name and adjust hyperparameters in the config file (in folder `configs/`);
@@ -126,8 +129,8 @@ In general, to train and test on different datasets one must:
 ### Training Classical methods
 
 1. Select the dataset class to be used in `experiments/classical.py`;
-2. Specify the split to run classical methods on in `configs/classic_run.yml` under the 
-   `DATASET_NAME` parameter. Since classical methods are usually quite fast, you may set 
+2. Specify the split to run classical methods on in `configs/classic_run.yml` under the
+   `DATASET_NAME` parameter. Since classical methods are usually quite fast, you may set
    this to "_all_" to perform runs on all splits of said dataset;
 3. You may adjust other parameters in `classic_run.yml`, including the maximum number of features
    per document representation and parameters for the cross validation procedure.
@@ -145,7 +148,7 @@ In general, to train and test on different datasets one must:
 
 1. Do training steps 1-3;
 2. In `transformers_run.yml` set `TEST = true` and `CHECKPOINT_NAME` to the desired checkpoint file;
-   1. Accordingly, `TRAIN` should be set to `false`.
+    1. Accordingly, `TRAIN` should be set to `false`.
 3. Run `python experiments/transformer.py`.
 
 ### Running BiLSTMs
@@ -153,7 +156,7 @@ In general, to train and test on different datasets one must:
 This particular architecture was developed in keras rather than torch. In our opinion, keeping a separate
 environment for Tensorflow and PyTorch usually avoids a large number of headaches.
 The `environment-keras.yml` file is provided to create such an environment. It is based on the conda
-distribution of tensorflow, which comes pre-packaged with compiled cuda binaries. 
+distribution of tensorflow, which comes pre-packaged with compiled cuda binaries.
 Create and activate this environment, then train with `experiments/bilstm.py` and configure with `configs/keras_rum.yml`.
 
 **Note**: this environment may take a while to install.

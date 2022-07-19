@@ -35,7 +35,6 @@ class ClassicHandler:
 
     def __load_lemmatized(self, path, name):
         print("[INFO] Found lemmatized set saved")
-        # TODO: Re-check, not an efficient implementation
         _, y = self.__read_data(path)
         x = [literal_eval(line) for line in open(self.dataset.generated_root(self.config['DATASET_NAME']) / name, 'r',
                                                  encoding='utf-8').readlines()]
@@ -43,7 +42,6 @@ class ClassicHandler:
 
     def prepare_data(self, load_lemmatized: bool = True, **kwargs):
         """
-        # TODO update
         Loads and prepares data into class attributes. Applies preprocessing pipeline to text, unless and already
         preprocessed file exists. Then, turns processed text into vectors with TFIDF vectorizer.
         """

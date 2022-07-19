@@ -1,0 +1,16 @@
+name: ticket-class-svm
+channels:
+  - defaults
+dependencies:
+  - pip=22.1.2
+  - python=3.10.4
+  - pip:
+    - joblib==1.1.0
+    - nltk==3.7
+    - numpy==1.23.1
+    - pandas==1.4.3
+    - pyyaml==6.0
+    - scikit-learn==1.1.1
+    - scipy==1.8.1
+    - stop-words==2018.7.23
+    - tqdm==4.64.0

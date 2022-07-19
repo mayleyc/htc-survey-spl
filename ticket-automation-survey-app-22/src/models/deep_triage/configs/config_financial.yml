@@ -1,0 +1,25 @@
+dataset: "financial"
+validation: false
+
+# 1. Embeddings parameters
+embed_size: 200
+min_word_frequency: 5
+word2vec_epochs: 20
+
+# 2. Classifier hyperparameters
+batch_size: 16
+epochs: 100
+lr: 1.0e-4
+
+
+max_sentence_len: 200
+lstm_dim: 300
+dense_dim: 1000
+dropout: 0.3
+
+CLASS_BALANCED_WEIGHTED_LOSS: false
+REMOVE_GARBAGE_TEXT: false # may be important for bugs
+
+LOAD_MODEL: "" # path to .h5 file
+numCV: 3
+CV_REPEAT: 2

@@ -1,0 +1,37 @@
+PRETRAINED_LM: xlnet-base-cased
+FREEZE_BASE: false
+
+L2_REG: 0.01
+LEARNING_RATE: 2.0e-5
+BATCH_SIZE: 4
+TEST_BATCH_SIZE: 8
+EPOCHS: 5
+LABEL: "flattened_label" # Which label to use for classification: "label", "flattened_label"
+CLASS_BALANCED_WEIGHTED_LOSS: false
+REMOVE_GARBAGE_TEXT: false # may be important for bugs
+
+summary_type: "first" # mean, first, cls_index, attn
+#summary_use_proj:
+#summary_proj_to_labels:
+#summary_activation:
+#summary_first_dropout:
+#summary_last_dropout:
+
+DEVICE: "cuda"
+TENSORBOARD: false
+
+MODEL_FOLDER: "src/models/xlnet/dumps/xlnet_first"
+EPOCHS_TO_KEEP: 1
+SAVE_NON_IMPROVING: false  # Always save all epochs. True also saves non-improving
+EARLY_STOPPING:
+  monitor_key: "loss"
+  patience: 2
+  delta: 0.0001
+  metrics_trend: "decreasing" # The desired tendency of the metric
+
+# Reload
+RELOAD: false
+PATH_TO_RELOAD: "" # Full path to the model folder (e.g. dump_model) or to the epoch folder
+
+NUM_FOLD: 3
+CV_REPEAT: 1

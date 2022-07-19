@@ -71,7 +71,6 @@ def _confusion_matrix_multilabel(confusion_matrix, axes, class_label, class_name
 
 
 def plot_cm_multilabel(y_true, y_pred, labels, subplot_rows: int, subplot_columns: int):
-    # NOTE: Funziona ma non troppo; lascio come monito di non fare una confusion matrix
     cm = multilabel_confusion_matrix(y_true, y_pred)
     fig, ax = plt.subplots(subplot_rows, subplot_columns, figsize=(16, 16))
 

@@ -106,7 +106,6 @@ def lemmatize(tokens: List[List[str]], lang: str, allowed_postags=None, logging=
     # https://spacy.io/api/annotation
     docs_out = []
     for sent in tqdm(tokens, desc="Lemmatizing docs"):
-        # TODO: check
         doc = nlp(" ".join(sent))
         lemmatized = [token.lemma_ for token in doc if token.pos_ in allowed_postags]
         docs_out.append(lemmatized)

@@ -1,0 +1,9 @@
+# Training parameters
+autoTune: True
+autoTuneDuration: 2400
+
+PRE_TRAINED_VECTORS: "data/embeddings/cc.en.300.vec"
+
+NUM_FOLD: 3
+CV_REPEAT: 2
+LABEL: "flattened_label" # Which label to use for classification: "label", "flattened_label"

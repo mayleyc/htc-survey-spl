@@ -19,7 +19,6 @@ class TransformerClassifier(ClassificationModel):
                 param.requires_grad = False
 
     def forward(self, batch: Dict[str, torch.Tensor], *args, **kwargs) -> Any:
-        # TODO check kwargs if unused by trainer
         input_ids = batch["input_ids"].long().to(self.device)
         attention_mask = batch["attention_mask"].float().to(self.device)
         labels = batch.get("labels", None)

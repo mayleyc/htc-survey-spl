@@ -1,0 +1,22 @@
+stratifiedCV: 3
+MAX_FEATURES: 30000
+gridsearchCV_SPLITS: 4
+retrain: true
+SVM_GRID_PARAMS:
+  estimator__C: [ 0.1, 1, 5, 10 ]
+  estimator__max_iter: [ 1000 ]
+
+RANDOM_FOREST_GRID_PARAMS:
+  bootstrap: [True] # [True, False]
+  # max_depth: [None] # [100, None]
+  max_features: ['sqrt']
+  min_samples_leaf: [1] #[1, 2]
+  min_samples_split: [2] # [2, 5]
+  n_estimators: [100] # [100, 500,]
+
+ADABOOST_GRID_PARAMS:
+  n_estimators: [50]
+  learning_rate: [1.0]
+
+NB_GRID_PARAMS:
+  alpha: [ 0.01, 0.1, 0.5, 1.0, 10.0 ]

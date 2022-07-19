@@ -1,0 +1,32 @@
+PRETRAINED_LM: bert-base-uncased
+FREEZE_BASE: false
+
+L2_REG: 0.01
+LEARNING_RATE: 2.0e-5
+BATCH_SIZE: 8
+TEST_BATCH_SIZE: 8
+EPOCHS: 3
+CLF_STRATEGY: "mean_last"
+CLF_STRATEGY_NUM_LAYERS: 2 # Only considered for concat/avg CLF_STRATEGIES
+CLASS_BALANCED_WEIGHTED_LOSS: false
+LABEL: "flattened_label" # Which label to use for classification: "label", "flattened_label"
+REMOVE_GARBAGE_TEXT: false # may be important for bugs
+
+DEVICE: "cuda"
+TENSORBOARD: false
+
+MODEL_FOLDER: "src/models/hierarchical_labeling/dumps/bert_test_1"
+EPOCHS_TO_KEEP: 1
+SAVE_NON_IMPROVING: false  # Always save all epochs. True also saves non-improving
+EARLY_STOPPING:
+  monitor_key: "loss"
+  patience: 2
+  delta: 0.0001
+  metrics_trend: "decreasing" # The desired tendency of the metric
+
+# Reload
+RELOAD: false
+PATH_TO_RELOAD: "" # Full path to the model folder (e.g. dump_model) or to the epoch folder
+
+NUM_FOLD: 3
+CV_REPEAT: 2
