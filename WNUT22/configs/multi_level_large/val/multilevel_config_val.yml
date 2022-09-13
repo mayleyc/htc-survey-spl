@@ -1,0 +1,37 @@
+PRETRAINED_LM: bert-large-uncased
+MODEL_L1: "out/bert4c_large/bert_large_l1_concat_cls_3"
+MODEL_L2: "out/bert4c_large/bert_large_l2_concat_cls_3"
+
+dataset: "bugs"
+validation: true
+mode: "ML-large-val"
+
+L2_REG: 0.01
+LEARNING_RATE: 2.0e-5
+BATCH_SIZE: 32
+TEST_BATCH_SIZE: 32
+gradient_accum_train: true
+simulated_bs: 64
+
+EPOCHS: 40
+CLASS_BALANCED_WEIGHTED_LOSS: false
+LABEL: "flattened_label" # Which label to use for classification: "label", "flattened_label"
+REMOVE_GARBAGE_TEXT: false
+
+DEVICE: "cuda"
+TENSORBOARD: false
+
+EPOCHS_TO_KEEP: 2
+SAVE_NON_IMPROVING: false  # Always save all epochs. True also saves non-improving
+EARLY_STOPPING:
+  monitor_key: "loss"
+  patience: 1
+  delta: 0.0001
+  metrics_trend: "decreasing" # The desired tendency of the metric
+
+# Reload
+RELOAD: false
+PATH_TO_RELOAD: "" # Full path to the model folder (e.g. dump_model) or to the epoch folder
+
+NUM_FOLD: 3
+CV_REPEAT: 1
