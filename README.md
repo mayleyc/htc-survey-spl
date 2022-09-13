@@ -17,5 +17,5 @@ Structure:
     - Zangari A, Marcuzzo M, Schiavinato M, Gasparetto A, Albarelli A. (2022) Ticket Automation: an Insight into Current Research with Applications to Multi-level Classification
       Scenarios. (In review) 
 
-- [ticket-automation-survey-app-22](./wnut22)
+- [W-NUT 2022](./WNUT22)
     - Marcuzzo M, Zangari A, Schiavinato M, Giudice L, Gasparetto A, Albarelli A. (2022) A multi-level approach for hierarchical Ticket Classification. 
