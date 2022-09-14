@@ -1,4 +1,3 @@
-# Imports for SHAP MimicExplainer with LightGBM surrogate model
 import os
 import re
 from pathlib import Path
@@ -10,12 +9,12 @@ import torch
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, classification_report
 # Split data into train and test
 from sklearn.model_selection import RepeatedStratifiedKFold
-
 from src.dataset_tools.data_preparation.prepare_linux_dataset import read_dataset as read_bugs
 from src.models.multi_level.modules.utility_functions import _predict, _setup_training
 from src.models.multi_level.multilevel_models import MultiLevelBERT, SupportedBERT
 from src.training_scripts.multilevel_models.train_multilevel import ensemble_args_split, get_actual_dump_name
 from src.utils.generic_functions import load_yaml
+from src.utils.text_utilities.preprocess import text_cleanup
 
 
 def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
@@ -43,7 +42,7 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
     return metrics, report
 
 
-def main():
+def run_metric_analysis():
     df = read_bugs()
     config_path = "configs/error_analysis/multilevel_config_error.yml"
     seeds = load_yaml("configs/random_seeds.yml")
@@ -128,8 +127,40 @@ def main():
     labels = y_test.unique()
     ordered['label'] = ordered['label'].apply(lambda x: labels[int(x)])
     ordered.to_csv(save_path / f"{model_class.__name__}_errors.csv")
-    print("DIO")
+
+
+def run_length_analysis():
+    df = read_bugs()
+    df['message'] = text_cleanup(df['message'])
+    min_val = 1000000
+    max_val = 0
+    for label, slash in df.groupby('label'):
+        texts = slash['message']
+        lengths = texts.map(len).to_numpy()  # including spaces
+        avg_len = np.mean(lengths)
+        if avg_len < min_val:
+            min_val = avg_len
+        if avg_len > max_val:
+            max_val = avg_len
+        print(f"{label} | avg len: {avg_len:.2f} | std: {np.std(lengths):.2f}")
+    print(f"MIN: {min_val:.2f}")
+    print(f"MAX: {max_val:.2f}")
+    print("-----------------------------------")
+    min_val = 1000000
+    max_val = 0
+    for label, slash in df.groupby('flattened_label'):
+        texts = slash['message']
+        lengths = texts.map(len).to_numpy()  # including spaces
+        avg_len = np.mean(lengths)
+        if avg_len < min_val:
+            min_val = avg_len
+        if avg_len > max_val:
+            max_val = avg_len
+        print(f"{label} | avg len: {avg_len:.2f} | std: {np.std(lengths):.2f}")
+    print(f"MIN: {min_val:.2f}")
+    print(f"MAX: {max_val:.2f}")
 
 
 if __name__ == "__main__":
-    main()
+    # run_length_analysis()
+    run_metric_analysis()
