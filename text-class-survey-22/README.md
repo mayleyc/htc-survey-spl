@@ -37,7 +37,7 @@ instructions on how to generate these datasets after obtaining the RCV1/2 from N
 In the case of Wikipedia articles, datasets are provided in a Google Drive folder.
 
 1. Download the datasets
-   from [DSI dataset repository](https://drive.google.com/drive/folders/1SHkQ4ayMMOuXRxDi24BOIKPmDj-qIzKs?usp=sharing);
+   from [Zenodo](https://doi.org/10.5281/zenodo.7244893);
 2. Extract them inside folder `data/raw/` (e.g. `data/raw/enwiki/` contains the EnWiki-100 dataset);
     1. This can be achieved using `tar -xzf {file}.tar.gz -C {destination_folder}`.
 3. Download pretrained embeddings as described [below](#download-embeddings);
@@ -174,7 +174,7 @@ Create and activate this environment, then train with `experiments/bilstm.py` an
 If you find this code or the provided data useful in your research, please consider citing:
 
 ```
-    @Article{info13020083,
+@Article{info13020083,
     AUTHOR = {Gasparetto, Andrea and Marcuzzo, Matteo and Zangari, Alessandro and Albarelli, Andrea},
     TITLE = {A Survey on Text Classification Algorithms: From Text to Predictions},
     JOURNAL = {Information},
@@ -185,11 +185,11 @@ If you find this code or the provided data useful in your research, please consi
     URL = {https://www.mdpi.com/2078-2489/13/2/83},
     ISSN = {2078-2489},
     DOI = {10.3390/info13020083}
-    }
+}
 ```
 
 ```
-   @article{10.1371/journal.pone.0270904,
+@article{10.1371/journal.pone.0270904,
     doi = {10.1371/journal.pone.0270904},
     author = {Gasparetto, Andrea AND Zangari, Alessandro AND Marcuzzo, Matteo AND Albarelli, Andrea},
     journal = {PLOS ONE},
@@ -201,5 +201,21 @@ If you find this code or the provided data useful in your research, please consi
     url = {https://doi.org/10.1371/journal.pone.0270904},
     pages = {1--46},
     number = {7}
+}
+```
+
+```
+@dataset{andrea_gasparetto_2022_7244893,
+   author       = {Andrea Gasparetto and
+                  Alessandro Zangari and
+                  Matteo Marcuzzo and
+                  Andrea Albarelli},
+   title        = {It/Fr/En-Wiki-100 datasets},
+   month        = "jul",
+   year         = 2022,
+   publisher    = {Zenodo},
+   version      = {1.0},
+   doi          = {10.5281/zenodo.7244893},
+   url          = {https://doi.org/10.5281/zenodo.7244893}
 }
 ```

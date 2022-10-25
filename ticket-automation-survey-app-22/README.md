@@ -7,7 +7,7 @@ Zangari A, Marcuzzo M, Schiavinato M, Gasparetto A, Albarelli A. (2022) Ticket A
 
 ## Datasets download
 
-Instructions on how to download the The Linux bugs and Financial datasets.
+Instructions on how to download the Linux bugs and Financial datasets.
 
 1. Download them from [here](https://drive.google.com/file/d/119JPHB8iizeMI2C69iN2VqpXmARoyUIk/view?usp=sharing);
 2. Unzip in the `data/` folder.
