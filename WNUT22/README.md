@@ -21,7 +21,7 @@ conda activate tc-conference
 
 ## Training our models
 
-1. Download the compressed dataset from this [Google Drive folder](https://drive.google.com/file/d/1GJ2B7uv2Z5QcbeVzPChFQ1iG8swV-z7b/view?usp=sharing) and move them to the `data`
+1. Download the compressed dataset from this [Google Drive folder](https://drive.google.com/file/d/1rFs7CcjV9zr8OxVQqmm1dy9g8iJRVgMK/view?usp=share_link) and move them to the `data`
    folder;
 2. Run the desired model from the `src/training_scripts` folder.
     - Multilevel models require prior training of the supporting models.
