@@ -163,24 +163,24 @@ def write_jsonl():
     _train_file_l.parent.mkdir(parents=True, exist_ok=True)
     data_1 = parse_books(_train_file)
     _data_1 = [{"text": d["text"], "labels": d["labels"]} for d in data_1]
-    LELELE = list()
+    list_data = list()
     for sample in _data_1:
-        LELELE.extend(sample["labels"])
+        list_data.extend(sample["labels"])
     # write_bgc_jsonl(_train_file_l, data)
     # ---------------"
     data_2 = parse_books(_test_file)
     _data_2 = [{"text": d["text"], "labels": d["labels"]} for d in data_2]
     # write_bgc_jsonl(_test_file_l, data)
-    LELELE = list()
+    list_data = list()
     for sample in _data_2:
-        LELELE.extend(sample["labels"])
+        list_data.extend(sample["labels"])
     # ---------------
     data_3 = parse_books(_val_file)
     _data_3 = [{"text": d["text"], "labels": d["labels"]} for d in data_3]
     # write_bgc_jsonl(_val_file_l, data)
-    LELELE = list()
+    list_data = list()
     for sample in _data_3:
-        LELELE.extend(sample["labels"])
+        list_data.extend(sample["labels"])
     print("")
 
 

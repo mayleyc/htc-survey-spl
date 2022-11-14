@@ -20,8 +20,6 @@ _samples_path = Path("data") / "Amazon" / "samples.jsonl"
 
 
 def analyze_amz(data: List[Dict[str, Any]]) -> None:
-    # df = pd.DataFrame.from_dict(data)
-
     summaries = [d["text"] for d in data]
     topics = [d["labels"] for d in data]
 
@@ -132,7 +130,4 @@ if __name__ == "__main__":
     with open(_samples_path, "r") as s:
         for line in s:
             samples.append(json.loads(line))
-    #
     analyze_amz(samples)
-
-    # get_graph()

@@ -8,11 +8,7 @@ from matplotlib import pyplot as plt
 
 
 def analyze_blurb(data: List[Dict[str, Any]]) -> None:
-    # df = pd.DataFrame.from_dict(data)
-
     summaries = [d["text"] for d in data]
-    # topics = [d["topics"] for d in data]
-
     avg_len = np.mean(list(map(str.__len__, summaries)))
 
     print(f"Average len of book summaries: {avg_len}")

@@ -3,7 +3,7 @@ import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 import seaborn as sns
 
 # import src.dataset_tools.data_preparation.prepare_financial_dataset as financial
-import src.dataset_tools.data_preparation.prepare_linux_dataset as linux
+import src.dataset_tools.linux_bugs.prepare_linux_dataset as linux
 
 
 def labels_barplots(df: pd.DataFrame, title: str = ""):
