@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding:utf-8
-from pathlib import Path
 import logging
+from pathlib import Path
 
 logging_level = {'debug': logging.DEBUG,
                  'info': logging.INFO,
@@ -50,4 +50,3 @@ class Logger(object):
                             level=logging_level[config.log.level],
                             format='%(asctime)s - %(levelname)s : %(message)s',
                             datefmt='%Y/%m/%d %H:%M:%S')
-

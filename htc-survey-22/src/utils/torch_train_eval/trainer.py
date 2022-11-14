@@ -290,7 +290,8 @@ class Trainer:
         # Save epoch number and metrics.
         # We save the current epoch number (counting from 0), the metrics dictionary and the best score saved in the ES
         # Currently we do not save other configurations like the watched metric name in the ES, delta value and patience counter
-        epoch_state_data = dict(epoch_number=epoch, metrics=metrics, best_score=self.early_stopper.best_score if self.early_stopper is not None else None)
+        epoch_state_data = dict(epoch_number=epoch, metrics=metrics,
+                                best_score=self.early_stopper.best_score if self.early_stopper is not None else None)
         with open(current_dump_folder / self._epoch_state_name, mode="w") as ed_file:
             json.dump(epoch_state_data, ed_file)
 

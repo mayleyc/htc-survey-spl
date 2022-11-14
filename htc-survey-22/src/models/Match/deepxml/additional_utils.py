@@ -74,7 +74,8 @@ def get_data_dump(model_cnf: Dict, df: pd.DataFrame, base_dump: Path) -> Tuple[p
     return tickets_tokenized, vectors
 
 
-def get_data_dump_new(model_cnf: Dict, x: List[str], base_dump: Path, fold: int, _set: str) -> Tuple[pd.Series, Word2Vec]:
+def get_data_dump_new(model_cnf: Dict, x: List[str], base_dump: Path, fold: int, _set: str) -> Tuple[
+    pd.Series, Word2Vec]:
     dataset_dump, emb_dump = base_dump / f"data_{_set}_fold_{fold}.jb", base_dump / f"vectors_{_set}_fold_{fold}.gz"
     if dataset_dump.exists() and emb_dump.exists():
         text_tokenized = joblib.load(dataset_dump)

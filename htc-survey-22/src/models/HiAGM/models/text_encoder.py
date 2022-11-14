@@ -2,8 +2,8 @@
 # coding:utf-8
 
 import torch
-from torch import nn
 import torch.nn.functional as F
+from torch import nn
 
 
 class GRU(nn.Module):
@@ -105,7 +105,7 @@ class TextEncoder(nn.Module):
                 config.text_encoder.CNN.num_kernel,
                 kernel_size,
                 padding=kernel_size // 2
-                )
+            )
             )
         self.top_k = config.text_encoder.topK_max_pooling
         self.rnn_dropout = torch.nn.Dropout(p=config.text_encoder.RNN.dropout)

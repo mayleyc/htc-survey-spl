@@ -160,7 +160,8 @@ def _setup_training(train_config, model_class: Type, workers: int, data, labels,
         trainer = GradientAccumulatorTrainer(model, train_config, loss_func, opt,
                                              early_stopper, metrics, unpack_flag=False)
     else:
-        trainer = Trainer(model, train_config, loss_func, opt, early_stopper, metrics, unpack_flag=False, add_start_time_folder=False)
+        trainer = Trainer(model, train_config, loss_func, opt, early_stopper, metrics, unpack_flag=False,
+                          add_start_time_folder=False)
     return trainer, training_loader, validation_loader
 
 

@@ -4,7 +4,6 @@
 
 import json
 import os
-import src.models.HiAGM.helper.logger as logger
 
 
 class Configure(object):

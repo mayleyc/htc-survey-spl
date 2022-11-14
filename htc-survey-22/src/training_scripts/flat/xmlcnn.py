@@ -18,8 +18,8 @@ from tqdm import tqdm
 
 from src.dataset_tools.dataset_manager import DatasetManager
 from src.models.BERT_flat.utility_functions import get_loss_function
-from src.models.Capsules.dataset import EmbeddingDataset, load_vectors
 from src.models.SVM.preprocessing import process_list_dataset
+from src.models.XMLCNN.dataset import EmbeddingDataset, load_vectors
 from src.models.XMLCNN.xmlcnn import XmlCNN
 from src.training_scripts.script_utils import save_results
 from src.utils.generic_functions import load_yaml, get_model_dump_path
@@ -73,7 +73,8 @@ def run_training(config: Dict, train_set: str, out_folder: Path, split_fun=None)
             # and never used in validation or training
             x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size=0.2,
                                                                 random_state=seeds["validation_split_seed"],
-                                                                stratify=itemgetter(*idx_train)(ds_manager.labels_for_splitter))
+                                                                stratify=itemgetter(*idx_train)(
+                                                                    ds_manager.labels_for_splitter))
         # x_train = x_train[:40000]
         # y_train = y_train[:40000]
         # x_test = x_test[:40000]

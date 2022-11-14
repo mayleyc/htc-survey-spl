@@ -18,13 +18,11 @@ of the csv.
 Parsing is done with BeautifulSoup library (`pip install bs4` to get it).
 """
 
-import os
-import time
 import csv
+import urllib.request
 
 import tqdm as tqdm
 from bs4 import BeautifulSoup
-import urllib.request
 
 
 def create_csv(filename, fieldnames, data):

@@ -5,7 +5,7 @@ from typing import Dict, List, Callable
 
 import numpy as np
 from sklearn.model_selection import RepeatedStratifiedKFold
-from sklearn.preprocessing import MultiLabelBinarizer, LabelBinarizer
+from sklearn.preprocessing import MultiLabelBinarizer
 
 from src.dataset_tools import get_bgc_split_jsonl, get_amazon, read_bugs, get_rcv1_split, read_wos_dataset
 from src.utils.generic_functions import load_yaml
@@ -126,7 +126,7 @@ class DatasetManager:
         # Set overall length of dataset
         self.len: int = len(all_labels)
         if self.objective == "multilabel":
-        # Fit the binarizer on all labels
+            # Fit the binarizer on all labels
             self.binarizer.fit(all_labels)
             # Binarize labels
             self.train_labels: np.ndarray = self.binarizer.transform(train_labels)

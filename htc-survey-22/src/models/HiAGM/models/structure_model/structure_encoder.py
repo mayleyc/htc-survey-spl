@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # coding:utf-8
 
-import torch.nn as nn
-from src.models.HiAGM.models.structure_model.graphcnn import HierarchyGCN
-from src.models.HiAGM.models.structure_model.tree import Tree
 import json
 import os
+
 import numpy as np
+import torch.nn as nn
+
 from src.models.HiAGM.helper.utils import get_hierarchy_relations
+from src.models.HiAGM.models.structure_model.graphcnn import HierarchyGCN
+from src.models.HiAGM.models.structure_model.tree import Tree
 from src.models.HiAGM.models.structure_model.weighted_tree_lstm import WeightedHierarchicalTreeLSTMEndtoEnd
 
 MODEL_MODULE = {

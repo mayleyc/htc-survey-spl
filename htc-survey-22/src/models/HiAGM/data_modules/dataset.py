@@ -1,10 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from torch.utils.data.dataset import Dataset
-import src.models.HiAGM.helper.logger as logger
+# CODE BY: https://github.com/Alibaba-NLP/HiAGM
+# Rights reserved to original authors. Only minor adaptations have been made.
+
 import json
 import os
+
+from torch.utils.data.dataset import Dataset
+
+import src.models.HiAGM.helper.logger as logger
 
 
 def get_sample_position(corpus_filename, on_memory, corpus_lines, stage):

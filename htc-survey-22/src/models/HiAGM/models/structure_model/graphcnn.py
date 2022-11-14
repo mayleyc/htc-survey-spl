@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding:utf-8
+import numpy as np
 import torch
+import torch.nn.functional as F
 from torch import nn
 from torch.nn.parameter import Parameter
-import torch.nn.functional as F
-import numpy as np
 
 
 class HierarchyGCN(nn.Module):

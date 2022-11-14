@@ -27,7 +27,8 @@ def analyze_amz(data: List[Dict[str, Any]]) -> None:
 
     print(f"Average len of reviews: {avg_len}")
 
-    labels_histogram(topics, multilabel=True, title=f"Amz topics frequency ({len([a for f in topics for a in f])}, log scale)")
+    labels_histogram(topics, multilabel=True,
+                     title=f"Amz topics frequency ({len([a for f in topics for a in f])}, log scale)")
     label_count_histogram(topics, title="Amz number of topics per document (log scale)")
 
     for level in range(2):
@@ -92,8 +93,10 @@ def get_graph():
         for product in tqdm(cat_f):
             d = json.loads(product)
             asin: str = d["asin"].strip()
-            categories = [re.sub(r"\s+", "-", re.sub(r"[^a-zA-Z\s]", "", html.unescape(c.strip()).lower()).strip()).strip() for c in d["category"] if
-                          c.strip() != "</span></span></span>"]
+            categories = [
+                re.sub(r"\s+", "-", re.sub(r"[^a-zA-Z\s]", "", html.unescape(c.strip()).lower()).strip()).strip() for c
+                in d["category"] if
+                c.strip() != "</span></span></span>"]
             categories = [c for c in categories if (c not in remove)]
 
             to_be_pruned = set(categories) & set(remove_from.keys())

@@ -4,8 +4,6 @@ from typing import List
 
 import pandas as pd
 
-from src.utils.generic_functions import dump_yaml
-
 
 def save_results(results: List, out_folder: Path, config: dict):
     # Average metrics over all folds and save them to csv

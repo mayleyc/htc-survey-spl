@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # coding:utf-8
 
-import src.models.HiAGM.helper.logger as logger
-from src.models.HiAGM.train_modules.evaluation_metrics import evaluate
 import torch
 import tqdm
+
+import src.models.HiAGM.helper.logger as logger
+from src.models.HiAGM.train_modules.evaluation_metrics import evaluate
 
 
 class Trainer(object):

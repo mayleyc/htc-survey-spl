@@ -49,7 +49,8 @@ class XmlCNN(nn.Module, TrainableModel):
         self.dropout = nn.Dropout(p=dropout)
         self.fc1 = nn.Linear(self.num_bottleneck_hidden, target_class)
 
-    def forward(self, batch: Tuple[torch.Tensor, torch.Tensor], *args, **kwargs) -> Tuple[torch.Tensor, torch.Tensor, None, None, torch.Tensor]:
+    def forward(self, batch: Tuple[torch.Tensor, torch.Tensor], *args, **kwargs) -> Tuple[
+        torch.Tensor, torch.Tensor, None, None, torch.Tensor]:
         x, y = batch
         x = x.long().to(self.device)
         y = y.long().to(self.device)

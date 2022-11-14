@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# CODE BY: https://github.com/Alibaba-NLP/HiAGM
+# Rights reserved to original authors. Only minor adaptations have been made.
+
 import torch
 
 

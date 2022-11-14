@@ -2,13 +2,13 @@
 # coding:utf-8
 
 import torch.nn as nn
-from src.models.HiAGM.models.structure_model.structure_encoder import StructureEncoder
-from src.models.HiAGM.models.text_encoder import TextEncoder
+
 from src.models.HiAGM.models.embedding_layer import EmbeddingLayer
 from src.models.HiAGM.models.multi_label_attention import HiAGMLA
-from src.models.HiAGM.models.text_feature_propagation import HiAGMTP
 from src.models.HiAGM.models.origin import Classifier
-
+from src.models.HiAGM.models.structure_model.structure_encoder import StructureEncoder
+from src.models.HiAGM.models.text_encoder import TextEncoder
+from src.models.HiAGM.models.text_feature_propagation import HiAGMTP
 
 DATAFLOW_TYPE = {
     'HiAGM-TP': 'serial',

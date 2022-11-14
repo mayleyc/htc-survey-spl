@@ -39,7 +39,8 @@ class MultiLabelDataset(Dataset):
     def __getitem__(self, item):
         data_x = self.data_x[item]
         if self.training and self.data_y is not None:
-            data_y = self.data_y[item].toarray().squeeze(0).astype(np.float32) # .astype(np.float32)  # .toarray().squeeze(0).astype(np.float32)
+            data_y = self.data_y[item].toarray().squeeze(0).astype(
+                np.float32)  # .astype(np.float32)  # .toarray().squeeze(0).astype(np.float32)
             return data_x, data_y
         else:
             return data_x

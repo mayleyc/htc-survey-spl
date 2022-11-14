@@ -1,8 +1,9 @@
+from typing import Dict, Any, Tuple
+
 import torch
 import torch.nn.functional as F
 from torch import nn
 from transformers import AutoModel
-from typing import Dict, Any, Tuple
 
 from src.utils.torch_train_eval.model import TrainableModel
 

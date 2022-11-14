@@ -9,17 +9,6 @@ from src.models.SVM.vectorization import tfidf_processing
 
 def run_svm_classifier(train_x, train_y, test_x, config):
     train_vectors, test_vectors = tfidf_processing(train_x, test_x, config)
-    # -----------------------------------------------------------------
-    # if config["vectorization"] == "tf-idf":
-    #     train_vectors, test_vectors = tfidf_processing(train_x, test_x, config)
-    #     #
-    # # elif config["vectorization"] == "ft":
-    # #     train_vectors, test_vectors = fasttext_processing(train_x, test_x, config)
-    # # elif config["vectorization"] == "glove":
-    # #     train_vectors, test_vectors = glove_processing(train_x, test_x, config)
-    # else:
-    #     raise ValueError
-    # -----------------------------------------------------------------
     # Linear SVC is generally faster than SVM(kernel=linear)
     clf_svc = LinearSVC()
     multilabel_classifier = OneVsRestClassifier(clf_svc, n_jobs=6)

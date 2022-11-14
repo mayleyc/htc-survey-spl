@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 # coding:utf-8
+# CODE BY: https://github.com/Alibaba-NLP/HiAGM
+# Rights reserved to original authors. Only minor adaptations have been made.
 
-import pickle
-from collections import Counter
-import src.models.HiAGM.helper.logger as logger
-import tqdm
-import os
 import json
+import os
+from collections import Counter
+
+import tqdm
+
+import src.models.HiAGM.helper.logger as logger
 
 
 class Vocab(object):

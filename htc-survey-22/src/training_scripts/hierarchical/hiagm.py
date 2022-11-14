@@ -9,9 +9,9 @@ import src.models.HiAGM.helper.logger as logger
 from src.dataset_tools.dataset_manager import DatasetManager
 from src.models.HiAGM import Vocab, Configure, HiAGM, _predict, \
     set_optimizer, ClassificationLoss, Trainer, data_loaders
+from src.models.HiAGM.prepare_our_data import write_jsonl_split
 from src.models.HiAGM.train import save_metric_checkpoint, load_best_epoch, \
     make_or_load_checkpoint
-from src.models.HiMatch.prepare_our_data import write_jsonl_split
 from src.training_scripts.script_utils import save_results
 from src.utils.metrics import compute_metrics, compute_hierarchical_metrics
 

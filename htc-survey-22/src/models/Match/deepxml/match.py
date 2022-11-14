@@ -1,9 +1,10 @@
+import copy
+import json
+import math
+
+import numpy as np
 import torch
 import torch.nn as nn
-import math
-import json
-import copy
-import numpy as np
 
 ACT2FN = {"relu": torch.nn.functional.relu}
 
@@ -74,7 +75,8 @@ class BertEmbeddings(nn.Module):
     def __init__(self, config, emb_init, emb_trainable):
         super(BertEmbeddings, self).__init__()
         self.word_embeddings = nn.Embedding(config.vocab_size, config.hidden_size,
-                                            _weight=torch.from_numpy(emb_init).float() if emb_init is not None else None)
+                                            _weight=torch.from_numpy(
+                                                emb_init).float() if emb_init is not None else None)
         self.word_embeddings.weight.requires_grad = emb_trainable
         self.position_embeddings = nn.Embedding(config.max_position_embeddings, config.hidden_size)
 
@@ -291,7 +293,8 @@ class LastLayer(nn.Module):
 
 
 class BaseBertModel(nn.Module):
-    def __init__(self, hidden_size, n_layers, n_probes, n_aheads, intermediate_size, dropout, hidden_act="relu", src_max_len=500,
+    def __init__(self, hidden_size, n_layers, n_probes, n_aheads, intermediate_size, dropout, hidden_act="relu",
+                 src_max_len=500,
                  padding_idx=0, vocab_size=None, emb_init=None, emb_trainable=True, bottleneck_dim=None, **kwargs):
         super(BaseBertModel, self).__init__()
         self.initializer_range = 0.02
@@ -304,7 +307,8 @@ class BaseBertModel(nn.Module):
             vocab_size, hidden_size = emb_init.shape
         self.register_buffer('tok_cls', torch.LongTensor([vocab_size + i for i in range(n_probes)]))
         vocab_size = vocab_size + n_probes
-        emb_init = np.vstack((emb_init, np.random.normal(loc=0.0, scale=self.initializer_range, size=(n_probes, hidden_size))))
+        emb_init = np.vstack(
+            (emb_init, np.random.normal(loc=0.0, scale=self.initializer_range, size=(n_probes, hidden_size))))
         bertconfig = BertConfig(vocab_size, hidden_size, n_layers, n_aheads, intermediate_size, hidden_act=hidden_act,
                                 hidden_dropout_prob=dropout, attention_probs_dropout_prob=dropout,
                                 max_position_embeddings=src_max_len + n_probes)

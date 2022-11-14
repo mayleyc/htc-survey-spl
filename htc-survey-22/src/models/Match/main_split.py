@@ -1,22 +1,23 @@
+# CODE BY: https://github.com/yuzhimanhua/MATCH
+# Rights reserved to original authors. Only minor adaptations have been made.
+
 import faulthandler
 import os
-from operator import itemgetter
 from pathlib import Path
 
 import click
 import pandas as pd
 import torch
 from logzero import logger
-from sklearn.model_selection import train_test_split, RepeatedStratifiedKFold
+from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader
 
 from deepxml.data_utils import get_mlb
 from deepxml.dataset import MultiLabelDataset
 from deepxml.match import MATCH
 from deepxml.models import Model
-from src.dataset_tools import read_bugs, get_amazon, get_bgc_split_jsonl, get_rcv1_split
-from src.dataset_tools.wos.generation import read_wos_dataset
-from src.models.Match.deepxml.additional_utils import get_data_dump, get_data_dump_new
+from src.dataset_tools import get_bgc_split_jsonl, get_rcv1_split
+from src.models.Match.deepxml.additional_utils import get_data_dump_new
 from src.utils.generic_functions import load_yaml, dump_yaml
 from src.utils.metrics import compute_metrics, compute_hierarchical_metrics
 from src.utils.text_utilities.multilabel import normalize_labels

@@ -1,17 +1,22 @@
 # !/usr/bin/env python
 # coding:utf-8
 
-import helper.logger as logger
-from models.model import HiAGM
-import torch
-import sys
-from helper.configure import Configure
+# CODE BY: https://github.com/Alibaba-NLP/HiAGM
+# Rights reserved to original authors. Only minor adaptations have been made.
+
 import os
+import sys
+
+import torch
+
+import helper.logger as logger
 from data_modules.data_loader import data_loaders
 from data_modules.vocab import Vocab
+from helper.configure import Configure
+from helper.utils import load_checkpoint
+from models.model import HiAGM
 from train_modules.criterions import ClassificationLoss
 from train_modules.trainer import Trainer
-from helper.utils import load_checkpoint
 
 
 def set_optimizer(config, model):

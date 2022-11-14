@@ -1,3 +1,6 @@
+# CODE BY: https://github.com/yuzhimanhua/MATCH
+# Rights reserved to original authors. Only minor adaptations have been made.
+
 import faulthandler
 import os
 from operator import itemgetter

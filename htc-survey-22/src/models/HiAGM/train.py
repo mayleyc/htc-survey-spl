@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 # coding:utf-8
+
+# CODE BY: https://github.com/Alibaba-NLP/HiAGM
+# Rights reserved to original authors. Only minor adaptations have been made.
+
 import os
 import time
 from pathlib import Path
@@ -11,14 +15,14 @@ from tqdm import tqdm
 
 from src.models.HiAGM.data_modules.data_loader import data_loaders
 from src.models.HiAGM.data_modules.vocab import Vocab
-from src.models.HiAGM.helper.configure import Configure
-from src.models.HiAGM.models.model import HiAGM
 from src.models.HiAGM.helper import logger as logger
+from src.models.HiAGM.helper.configure import Configure
 from src.models.HiAGM.helper.utils import load_checkpoint, save_checkpoint
-from src.models.HiMatch.prepare_our_data import prepare_dataset, write_split
-from src.utils.metrics import compute_metrics, compute_hierarchical_metrics
+from src.models.HiAGM.models.model import HiAGM
+from src.models.HiAGM.prepare_our_data import prepare_dataset, write_split
 from src.models.HiAGM.train_modules.criterions import ClassificationLoss
 from src.models.HiAGM.train_modules.trainer import Trainer
+from src.utils.metrics import compute_metrics, compute_hierarchical_metrics
 
 os.linesep = '\n'
 

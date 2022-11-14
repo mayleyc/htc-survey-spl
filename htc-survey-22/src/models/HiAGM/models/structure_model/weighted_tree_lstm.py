@@ -64,9 +64,10 @@ class WeightedHierarchicalTreeLSTMEndtoEnd(nn.Module):
             if i == 0:  # should be root.idx
                 continue
             tree_label_feature.append(
-                torch.cat((self.node_dropout(self.label_trees[i].bottom_up_state[1].view(inputs.shape[1], 1, self.mem_dim)),
-                           self.node_dropout(self.label_trees[i].top_down_state[1].view(inputs.shape[1], 1, self.mem_dim))),
-                          2))
+                torch.cat(
+                    (self.node_dropout(self.label_trees[i].bottom_up_state[1].view(inputs.shape[1], 1, self.mem_dim)),
+                     self.node_dropout(self.label_trees[i].top_down_state[1].view(inputs.shape[1], 1, self.mem_dim))),
+                    2))
         label_feature = torch.cat(tree_label_feature, 1)  # label_feature: batch_size, num_nodes, 2 * node_dimension
 
         return label_feature

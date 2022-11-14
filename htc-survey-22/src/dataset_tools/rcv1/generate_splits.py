@@ -84,7 +84,8 @@ class BaseRCV:
         # If pickled file doesn't exist, create it and move on
         if not (pickle_path / "rcv1v2.pkl").exists():
             subfolders: List[str] = os.listdir(self.__raw_dataset_folder)
-            paths: List[Path] = [self.__raw_dataset_folder / sub for sub in subfolders if sub not in {"codes", "dtds", "MD5SUMS"}]
+            paths: List[Path] = [self.__raw_dataset_folder / sub for sub in subfolders if
+                                 sub not in {"codes", "dtds", "MD5SUMS"}]
             # Parse XML files
             for path in tqdm(paths, desc="Processing folders..."):
                 for xml_file in path.iterdir():
@@ -105,7 +106,8 @@ class BaseRCV:
             with open(pickle_path / "rcv1v2.pkl", "rb") as f:
                 self.__articles = pickle.load(f)
 
-        assert len(self.ids) == len(self.__articles), f"There should be {len(self.ids)} in RCV1-v2, but only {len(self.__articles)} have been read"
+        assert len(self.ids) == len(
+            self.__articles), f"There should be {len(self.ids)} in RCV1-v2, but only {len(self.__articles)} have been read"
 
     def _read_topics(self):
         """

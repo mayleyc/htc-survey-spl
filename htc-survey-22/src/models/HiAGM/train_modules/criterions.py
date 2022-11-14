@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import torch
+
 from src.models.HiAGM.helper.utils import get_hierarchy_relations
 
 

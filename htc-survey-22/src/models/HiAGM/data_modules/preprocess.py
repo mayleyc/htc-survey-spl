@@ -1,10 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import re
-import tqdm
-import src.models.HiAGM.helper.logger as logger
+# CODE BY: https://github.com/Alibaba-NLP/HiAGM
+# Rights reserved to original authors. Only minor adaptations have been made.
+
 import json
+import re
+
+import tqdm
+
+import src.models.HiAGM.helper.logger as logger
 
 english_stopwords = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll",
                      "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's",

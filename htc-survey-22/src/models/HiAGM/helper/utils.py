@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 import codecs
+
 import torch
+
 from src.models.HiAGM.models.structure_model.tree import Tree
 
 

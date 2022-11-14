@@ -1,14 +1,14 @@
 import os
-from pathlib import Path
-
-import numpy as np
-import joblib
 from collections import Counter
-from sklearn.preprocessing import MultiLabelBinarizer, normalize
-from sklearn.datasets import load_svmlight_file
-from gensim.models import KeyedVectors
-from tqdm import tqdm
+from pathlib import Path
 from typing import Union, Iterable, List
+
+import joblib
+import numpy as np
+from gensim.models import KeyedVectors
+from sklearn.datasets import load_svmlight_file
+from sklearn.preprocessing import MultiLabelBinarizer, normalize
+from tqdm import tqdm
 
 
 def build_vocab(texts: Iterable, w2v_model: Union[KeyedVectors, str], vocab_size=500000,
@@ -39,7 +39,8 @@ def get_word_emb(vec_path, vocab_path=None):
 
 
 def get_data(text_file, label_file=None):
-    return np.load(text_file, allow_pickle=True), np.load(label_file, allow_pickle=True) if label_file is not None else None
+    return np.load(text_file, allow_pickle=True), np.load(label_file,
+                                                          allow_pickle=True) if label_file is not None else None
 
 
 def convert_to_binary(text_file, label_file=None, max_len=None, vocab=None, pad='<PAD>', unknown='<UNK>'):

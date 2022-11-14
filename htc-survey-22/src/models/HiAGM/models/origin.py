@@ -18,7 +18,7 @@ class Classifier(nn.Module):
         self.config = config
         self.device = device
         self.linear = nn.Linear(len(config.text_encoder.CNN.kernel_size) * config.text_encoder.CNN.num_kernel,
-                                   len(vocab.v2i['label'].keys()))
+                                len(vocab.v2i['label'].keys()))
         self.dropout = nn.Dropout(p=config.model.classifier.dropout)
 
     def forward(self, inputs):
@@ -31,4 +31,3 @@ class Classifier(nn.Module):
         token_output = token_output.view(token_output.shape[0], -1)
         logits = self.dropout(self.linear(token_output))
         return logits
-
