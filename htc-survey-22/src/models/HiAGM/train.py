@@ -33,7 +33,7 @@ def _predict(model: HiAGM, loader):
     infer_time_batch = .0
     for batch_i, batch in enumerate(tqdm(loader)):
         infer_time_start: int = time.perf_counter_ns()
-        logits = model((batch, "PRED"))
+        logits = model(batch)
         infer_time_end: int = time.perf_counter_ns()
         infer_time_batch += infer_time_end - infer_time_start
 
