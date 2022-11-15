@@ -20,7 +20,7 @@ conda env create -f environment.yml
 Activate environment:
 
 ```
-conda activate experiments-htc
+conda activate htc-survey
 ```
 
 ## Reproducing results
@@ -37,7 +37,12 @@ Available models:
 
 ## Dataset generation
 
-[... TODO]
+We could not share our splits for RCV1-v2 due to its license. It is therefore necessary to acquire it from NIST as instructed in the [official page](https://trec.nist.gov/data/reuters/reuters.html).
+We'll share instructions on how to generate our splits and use it with our models.
+
+The BGC dataset is downloadable from the [official repository](https://www.inf.uni-hamburg.de/en/inst/ab/lt/resources/data/blurb-genre-collection.html) with the "official" training and testing splits.
+
+Splits for the other dataset have been published on Zenodo at this [page](https://doi.org/10.5281/zenodo.7319518).
 
 ## Download embeddings
 
