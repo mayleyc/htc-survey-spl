@@ -37,12 +37,38 @@ Available models:
 
 ## Dataset generation
 
+Datasets should be in the `data` folder, organized with the following structure (the hierarchy files are in the `data/taxonomies` folder):
+```
+data/
+├── BGC/            
+│   ├── bgc_tax.txt
+│   ├── BlurbGenreCollection_EN_test.jsonl
+│   └── BlurbGenreCollection_EN_train.jsonl
+├── RCV1v2/            
+│   ├── rcv1_tax.txt
+│   ├── test.jsonl
+│   └── train.jsonl  
+├── Amazon/          
+│   ├── amazon_tax.txt
+│   └── samples.jsonl
+├── WebOfScience/            
+│   ├── wos_tax.txt
+│   └── samples.jsonl
+├── Bugs/            
+│   ├── bugs_tax.txt
+│   └── all_linux_bugs.csv.gz
+...                
+```
+
 We could not share our splits for RCV1-v2 due to its license. It is therefore necessary to acquire it from NIST as instructed in the [official page](https://trec.nist.gov/data/reuters/reuters.html).
 We'll share instructions on how to generate our splits and use it with our models.
 
 The BGC dataset is downloadable from the [official repository](https://www.inf.uni-hamburg.de/en/inst/ab/lt/resources/data/blurb-genre-collection.html) with the "official" training and testing splits.
+We'll share instructions on how to produce the JSONL files used in this work.
 
-Splits for the other dataset have been published on Zenodo at this [page](https://doi.org/10.5281/zenodo.7319518).
+In order to ease comparison in future works, a training and testing split for the Amazon/WOS/Bugs datasets have been published on Zenodo at this [page](https://doi.org/10.5281/zenodo.7319518).
+
+For the Amazon, WebOfScience and Bugs datasets the JSONL/CSV files can be obtained by merging the training and testing splits shared on Zenodo.
 
 ## Download embeddings
 
