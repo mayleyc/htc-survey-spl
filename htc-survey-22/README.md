@@ -1,8 +1,8 @@
 # Hierarchical Text Classification survey
 Implementations of HTC methods, used in paper:
 
-- Marcuzzo M, Zangari A, Michele S, Matteo R, Gasparetto A, Albarelli A. (2022)
-Hierarchical Text Classification: a review of current research. Submitted to Pattern Recognition.
+Zangari A, Marcuzzo M, Schiavinato M, Rizzo M, Giudice L, Gasparetto A, Albarelli
+Hierarchical Text Classification: a review of current research. Submitted to MDPI Electronics.
 
 > **NOTE**: set your working directory to `htc-survey-22` for imports to work properly.
 
@@ -82,17 +82,9 @@ from the following sources, which should then be placed in `data/embeddings/`:
 
 
 
-- **Matteo Marcuzzo**, Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice,
-  Italy
-- **Alessandro Zangari**, Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice,
-  Italy
-- **Michele Schiavinato**, Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice,
-  Italy
-- **Matteo Rizzo**, Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice,
-  Italy
-- **Andrea Gasparetto**, Department of Management, Ca' Foscari University, Venice, Italy
-- **Andrea Albarelli**, Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice,
-  Italy
+**Matteo Marcuzzo**, **Alessandro Zangari**, **Michele Schiavinato**,
+**Matteo Rizzo**, **Lorenzo Giudice**, **Andrea Albarelli**, and **Andrea Gasparetto** 
+are with the Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice, Italy
 
 ## Citing this work
  (To add when published)
