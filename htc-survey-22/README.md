@@ -1,7 +1,7 @@
 # Hierarchical Text Classification survey
 Implementations of HTC methods, used in paper:
 
-Zangari A, Marcuzzo M, Schiavinato M, Rizzo M, Giudice L, Gasparetto A, Albarelli
+Zangari A, Marcuzzo M, Rizzo M, Giudice L, Gasparetto A, Albarelli
 Hierarchical Text Classification: a review of current research. Submitted to MDPI Electronics.
 
 > **NOTE**: set your working directory to `htc-survey-22` for imports to work properly.
@@ -82,7 +82,7 @@ from the following sources, which should then be placed in `data/embeddings/`:
 
 
 
-**Matteo Marcuzzo**, **Alessandro Zangari**, **Michele Schiavinato**,
+**Matteo Marcuzzo**, **Alessandro Zangari**,
 **Matteo Rizzo**, **Lorenzo Giudice**, **Andrea Albarelli**, and **Andrea Gasparetto** 
 are with the Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice, Italy
 
