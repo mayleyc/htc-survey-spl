@@ -133,6 +133,7 @@ out/
 data/**/*.json
 *.taxonomy
 *.txt
+!requirements.txt
 *.csv
 *.csv.gz
 *.dict
@@ -140,8 +141,11 @@ data/*
 !data/.gitkeep
 !data/taxonomies
 !data/taxonomies/*
+src/models/HBGL/data/
 src/models/SVM/sklearn-hierarchical-classification/
 __deprecated/HFT_CNN/HFT-CNN/Word_embedding/cc.en.300.bin.gz
 7.7.0
 __deprecated/HFT_CNN/Word_embedding/cc.en.300.bin.gz
 /src/models/CLED/
+/src/models/GACapsHTC/configs/
+src/models/HBGL/data_ours.zip
