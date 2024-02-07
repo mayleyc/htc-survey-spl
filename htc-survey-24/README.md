@@ -5,7 +5,7 @@ Implementations of HTC methods, used in paper:
 Zangari A., Marcuzzo M., Rizzo M., Giudice L., Albarelli A., Gasparetto A.
 Hierarchical Text Classification: a Review of Current Research.
 
-> **NOTE**: set your working directory to `htc-survey-22` for imports to work properly.
+> **NOTE**: set your working directory to `htc-survey-24` for imports to work properly.
 
 ## Installation
 
@@ -92,7 +92,7 @@ from the following sources, which should then be placed in `data/embeddings/`:
 
 ## Authors and acknowledgment
 
-**Matteo Marcuzzo**, **Alessandro Zangari**,
+**Alessandro Zangari**, **Matteo Marcuzzo**,
 **Matteo Rizzo**, **Lorenzo Giudice**, **Andrea Albarelli**, and **Andrea Gasparetto**
 are with the Department of Environmental Sciences, Informatics and Statistics, Ca' Foscari University, Venice, Italy
 
