@@ -1,6 +1,6 @@
-# dsi-nlp-publib
+# dsi-publib
 
-The public code repository for NLP publications (Ca' Foscari University of Venice and Digital Strategy Innovation).
+The public code repository for DSI publications (Ca' Foscari University of Venice and Digital Strategy Innovation).
 
 Structure:
 
@@ -28,4 +28,7 @@ Structure:
 
 - [htc-survey-24](./htc-survey-24)
     - Zangari A, Marcuzzo M, Rizzo M, Giudice L, Albarelli A, Gasparetto A. (2024) Hierarchical Text Classification: a
-      Review of Current Research. (in review)
+      Review of Current Research. (TODO: update)
+
+- TODO: layers
+- TODO: stop-overkilling
