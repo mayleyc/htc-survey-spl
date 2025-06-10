@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Type, List, Dict, Callable, Optional
 
 import torch
+import pandas as pd
+import numpy as np
 
 from src.dataset_tools.dataset_manager import DatasetManager
 from src.models.BERT_flat.bert.bert_classifier import BERTForClassification
@@ -58,7 +60,7 @@ def _train_single_split(x_train, x_test, y_train, y_test,
     torch.cuda.empty_cache()
 
     # Return metric for current fold
-    return metrics
+    return metrics, y_pred, y_true
 
 
 def _training_testing_loop(config: Dict,
@@ -78,7 +80,9 @@ def _training_testing_loop(config: Dict,
     model_folder = out_folder
     os.makedirs(model_folder, exist_ok=True)
     # config["MODEL_FOLDER"] = str(model_folder)
+    save_preds = config.get("RELOAD", False)  # <- check if this is a testing run
     results = list()
+    pred_y_list, true_y_list = list(), list()
     # Train in splits
     fold_i: int = 0
     for (x_train, y_train), (x_test, y_test) in dataset.get_split():
@@ -87,12 +91,22 @@ def _training_testing_loop(config: Dict,
         config["MODEL_FOLDER"] = str(model_folder / f"fold_{fold_i}")
         if split_fun is not None:
             config.update(split_fun(fold_i))
-        metrics = _train_single_split(x_train, x_test, y_train, y_test,
+        metrics, y_pred, y_true = _train_single_split(x_train, x_test, y_train, y_test,
                                       config, model_class, logits_fn, dataset.binarizer)
         results.append(metrics)
+        
         # ---------------------------------------
         save_results(results, out_folder, config)
+        if save_preds:
+                pred_y_list.append(y_pred)
+                true_y_list.append(y_true)
 
+    if save_preds:
+        all_preds = pd.DataFrame(np.vstack(pred_y_list))
+        all_trues = pd.DataFrame(np.vstack(true_y_list))
+        all_preds.to_csv(out_folder / f"all_folds_pred_{dt.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv", index=False)
+        all_trues.to_csv(out_folder / f"all_folds_true_{dt.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv", index=False)
+        
 
 def run_configuration():
     # Paths

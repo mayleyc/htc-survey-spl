@@ -3,7 +3,8 @@ from typing import Tuple, Dict, Any, Union
 from src.dataset_tools.other.create_taxonomy import *
 from src.utils.generic_functions import simplify_text
 
-dataset = Path("data") / "Bugs" / "all_linux_bugs.csv.gz"
+dataset = Path("data") / "Bugs" / "linux_bugs.csv"
+#dataset = Path("data") / "Bugs" / "all_linux_bugs.csv.gz"
 os.linesep = '\n'
 
 

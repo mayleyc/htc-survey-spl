@@ -9,6 +9,9 @@ import pandas as pd
 from tqdm import tqdm
 
 _output_data = Path("data") / "WebOfScience" / "samples.jsonl"
+_train_data = Path("data") / "WebOfScience" / "wos_train.jsonl"
+_test_data = Path("data") / "WebOfScience" / "wos_test.jsonl"
+
 _tax_data = Path("data") / "WebOfScience" / "wos_tax.txt"
 
 _raw_folder = Path("data") / "raw" / "WebOfScience"
@@ -53,7 +56,15 @@ def generate_wos_dataset() -> None:
             line_s = json.dumps({"text": row["text"], "labels": [row["L1"], row["L2"]]})
             f.write(f"{line_s}\n")
 
+def merge_jsonl_files(input_files: List[Path]) -> None:
+    _output_data.parent.mkdir(parents=True, exist_ok=True)
+    with open(_output_data, "w", encoding="utf-8") as out_f:
+        for input_file in input_files:
+            with open(input_file, "r", encoding="utf-8") as in_f:
+                for line in in_f:
+                    out_f.write(line)
 
 if __name__ == "__main__":
-    generate_wos_dataset()
+    merge_jsonl_files([_train_data, _test_data])
+    #generate_wos_dataset()
     # read_wos_dataset()

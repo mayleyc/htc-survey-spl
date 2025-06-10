@@ -4,6 +4,8 @@ import re
 from pathlib import Path
 from random import shuffle
 from typing import List, Union, Dict, Any
+import sys
+import os
 
 import networkx as nx
 from bs4 import BeautifulSoup
@@ -12,6 +14,9 @@ from tqdm import tqdm
 from src.dataset_tools.blurb.analysis import analyze_blurb
 
 logging.getLogger().setLevel(logging.DEBUG)
+sys.path.append("./src")
+
+
 
 _train_file = Path("data") / "BGC" / "BlurbGenreCollection_EN_train.txt"
 _test_file = Path("data") / "BGC" / "BlurbGenreCollection_EN_test.txt"
@@ -76,19 +81,19 @@ def parse_books(file_path: Union[Path, str]) -> List[Dict[str, Any]]:
     logging.info(f"Parsing {file_path}...")
     data = list()
     soup = BeautifulSoup(open(file_path, "rt", encoding='utf-8').read(), "html.parser")
-    for book in tqdm(soup.findAll("book"), desc="Reading BGC"):
+    for book in tqdm(soup.find_all("book"), desc="Reading BGC"):
         categories = set()
         per_level_cats = dict()
         book_soup = BeautifulSoup(str(book), "html.parser")
         summary = str(book_soup.find("body").string)
         title = str(book_soup.find("title").string)
         summary = title + ". " + summary
-        for t in book_soup.findAll("topics"):
+        for t in book_soup.find_all("topics"):
             s1 = BeautifulSoup(str(t), "html.parser")
             structure = ["d0", "d1", "d2", "d3"]
             for i, level in enumerate(structure):
                 l_cat = set()
-                for t1 in s1.findAll(level):
+                for t1 in s1.find_all(level):
                     cat = re.sub(r"\s+", "-", re.sub(r"[^\w\s]", "", str(t1.string).strip())).strip()
                     categories.add(cat)
                     l_cat.add(cat)
@@ -163,24 +168,29 @@ def write_jsonl():
     _train_file_l.parent.mkdir(parents=True, exist_ok=True)
     data_1 = parse_books(_train_file)
     _data_1 = [{"text": d["text"], "labels": d["labels"]} for d in data_1]
-    list_data = list()
+    '''list_data = list()
     for sample in _data_1:
         list_data.extend(sample["labels"])
-    # write_bgc_jsonl(_train_file_l, data)
+    write_bgc_jsonl(_train_file_l, list_data)'''
+    write_bgc_jsonl(_train_file_l, _data_1)
     # ---------------"
     data_2 = parse_books(_test_file)
     _data_2 = [{"text": d["text"], "labels": d["labels"]} for d in data_2]
-    # write_bgc_jsonl(_test_file_l, data)
-    list_data = list()
+    
+    '''list_data = list()
     for sample in _data_2:
         list_data.extend(sample["labels"])
+    write_bgc_jsonl(_test_file_l, list_data)'''
+    write_bgc_jsonl(_test_file_l, _data_2)
     # ---------------
     data_3 = parse_books(_val_file)
     _data_3 = [{"text": d["text"], "labels": d["labels"]} for d in data_3]
-    # write_bgc_jsonl(_val_file_l, data)
-    list_data = list()
+    
+    '''list_data = list()
     for sample in _data_3:
         list_data.extend(sample["labels"])
+    write_bgc_jsonl(_val_file_l, list_data)'''
+    write_bgc_jsonl(_val_file_l, _data_3)
     print("")
 
 

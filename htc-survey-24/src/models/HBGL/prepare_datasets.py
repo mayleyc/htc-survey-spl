@@ -103,3 +103,5 @@ def convert_dataset(dataset_name: str, dev: float = 0.2):
 
 if __name__ == "__main__":
     convert_dataset("wos")
+    convert_dataset("bgc")
+    

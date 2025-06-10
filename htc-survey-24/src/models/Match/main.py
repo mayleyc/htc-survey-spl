@@ -18,8 +18,8 @@ from deepxml.dataset import MultiLabelDataset
 from deepxml.match import MATCH
 from deepxml.models import Model
 from src.dataset_tools import read_bugs, get_amazon
-from src.dataset_tools.wos.generation import read_wos_dataset
-from src.models.Match.deepxml.additional_utils import get_data_dump_new
+from src.dataset_tools.wos.generation import *
+from src.models.Match.deepxml.additional_utils import get_data_dump_new, get_data_dump
 from src.utils.generic_functions import load_yaml, dump_yaml
 from src.utils.metrics import compute_metrics, compute_hierarchical_metrics
 from src.utils.text_utilities.multilabel import normalize_labels
@@ -67,7 +67,7 @@ def main(data_cnf, model_cnf, mode, reg):
     x = [d["text"] for d in df]
 
     # LOAD DATASET and EMBEDDINGS
-    tickets_tokenized, kv = get_data_dump_new(model_cnf, x, base_dump=Path(data_cnf["data_dump"]), fold=1)
+    tickets_tokenized, kv = get_data_dump_new(model_cnf, x, base_dump=Path(data_cnf["data_dump"]), fold=1, _set = "train")
     emb_init = kv.syn1neg
 
     if mode is None or mode == 'train':

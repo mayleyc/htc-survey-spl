@@ -17,6 +17,11 @@ import os
 from pathlib import Path
 from logzero import logger
 
+from nltk.data import find
+try:
+    find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 
 def process_dataset(messages: pd.Series, remove_garbage: bool) -> Tuple[List[List[str]], pd.Series]:
     # df:  message, label, sub_labels
