@@ -218,7 +218,7 @@ def train(args, training_features, model, tokenizer):
 
     train_dataset = utils.Seq2seqDatasetForBert(
         features=training_features, max_source_len=args.max_source_seq_length,
-        max_target_len=args.max_target_seq_length, vocab_size=model.bert.embeddings.word_embeddings.num_embeddings,
+        max_target_len=args.max_target_seq_length, vocab_size=model.module.bert.embeddings.word_embeddings.num_embeddings,
         cls_id=tokenizer.cls_token_id, sep_id=tokenizer.sep_token_id, pad_id=tokenizer.pad_token_id,
         mask_id=tokenizer.mask_token_id, random_prob=args.random_prob, keep_prob=args.keep_prob,
         offset=train_batch_size * global_step, num_training_instances=train_batch_size * args.num_training_steps,

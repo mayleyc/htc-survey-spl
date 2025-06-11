@@ -11,7 +11,7 @@ from src.utils.metrics import compute_metrics, compute_hierarchical_metrics
 import sys
 
 # TODO: append path to main github repo folder
-sys.path.append("E:\\ricerca\\htc-survey")
+sys.path.append("/mnt/cimec-storage6/users/nguyenanhthu.tran/2025thesis/dsi-nlp-publib/htc-survey-24")
 print(sys.path)
 
 
