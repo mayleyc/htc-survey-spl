@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 RUN_NAME=$1
 if [ -z "$RUN_NAME" ]; then
-  RUN_NAME=bgc2
+  RUN_NAME=bgc_250618_1_mssl_500
 fi
 
 if [ ! -f  src/models/HBGL/data_ours/bgc/bgc_train.json ] || [ ! -f  src/models/HBGL/data_ours/bgc/bgc_dev.json ] || [ ! -f  src/models/HBGL/data_ours/bgc/bgc_test.json ] ; then
@@ -29,7 +29,7 @@ fi
 python src/models/HBGL/run.py\
     --train_file ${TRAIN_FILE} --output_dir ${OUTPUT_DIR}\
     --model_type bert --model_name_or_path bert-base-uncased --do_lower_case --max_source_seq_length 500 --max_target_seq_length 5 \
-    --per_gpu_train_batch_size 16 --gradient_accumulation_steps 1 \
+    --per_gpu_train_batch_size 8 --gradient_accumulation_steps 1 \
     --valid_file src/models/HBGL/data_ours/bgc/bgc_dev_generated.json \
     --test_file src/models/HBGL/data_ours/bgc/bgc_test_generated.json \
     --add_vocab_file src/models/HBGL/data_ours/bgc/label_map.pkl \

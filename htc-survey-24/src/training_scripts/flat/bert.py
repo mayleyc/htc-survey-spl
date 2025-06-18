@@ -62,6 +62,39 @@ def _train_single_split(x_train, x_test, y_train, y_test,
     # Return metric for current fold
     return metrics, y_pred, y_true
 
+def _training_testing_loop_old(config: Dict,
+                           model_class: Type,
+                           dataset: DatasetManager,
+                           out_folder: Path,
+                           logits_fn,
+                           split_fun: Optional[Callable] = None,
+                           save_name: str = None):
+    multilabel, champ_loss, match_loss = config["multilabel"], \
+                                         config.get("CHAMP_LOSS", False), \
+                                         config.get("MATCH_LOSS", False)
+    assert champ_loss <= multilabel, "Champ loss is only for multilabel settings"
+    assert match_loss <= multilabel, "MATCH loss is only for multilabel settings"
+
+    # General parameters
+    model_folder = out_folder
+    os.makedirs(model_folder, exist_ok=True)
+    # config["MODEL_FOLDER"] = str(model_folder)
+    results = list()
+    # Train in splits
+    fold_i: int = 0
+    for (x_train, y_train), (x_test, y_test) in dataset.get_split():
+        fold_i += 1
+        print(f"Building model for fold {fold_i}.")
+        config["MODEL_FOLDER"] = str(model_folder / f"fold_{fold_i}")
+        if split_fun is not None:
+            config.update(split_fun(fold_i))
+        metrics = _train_single_split(x_train, x_test, y_train, y_test,
+                                      config, model_class, logits_fn, dataset.binarizer)
+        results.append(metrics)
+        # ---------------------------------------
+        save_results(results, out_folder, config)
+
+
 
 def _training_testing_loop(config: Dict,
                            model_class: Type,

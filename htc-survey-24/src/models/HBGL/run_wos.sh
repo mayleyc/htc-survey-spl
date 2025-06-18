@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 RUN_NAME=$1
 if [ -z "$RUN_NAME" ]; then
-  RUN_NAME=wos2
+  RUN_NAME=wos_250617_10_mssl_509
 fi
 
 if [ ! -f  src/models/HBGL/data_ours/wos/wos_train.json ] || [ ! -f  src/models/HBGL/data_ours/wos/wos_dev.json ] || [ ! -f  src/models/HBGL/data_ours/wos/wos_test.json ] ; then
@@ -29,7 +29,7 @@ fi
 python src/models/HBGL/run.py\
     --train_file ${TRAIN_FILE} --output_dir ${OUTPUT_DIR}\
     --model_type bert --model_name_or_path bert-base-uncased --do_lower_case --max_source_seq_length 509 --max_target_seq_length 3 \
-    --per_gpu_train_batch_size 16 --gradient_accumulation_steps 1 \
+    --per_gpu_train_batch_size 8 --gradient_accumulation_steps 1 \
     --valid_file src/models/HBGL/data_ours/wos/wos_dev_generated.json \
     --test_file src/models/HBGL/data_ours/wos/wos_test_generated.json \
     --add_vocab_file src/models/HBGL/data_ours/wos/label_map.pkl \
@@ -39,6 +39,7 @@ python src/models/HBGL/run.py\
     --label_cpt src/models/HBGL/data_ours/wos/wos.taxnomy --label_cpt_not_incr_mask_ratio --label_cpt_steps 300 --label_cpt_use_bce \
     --wandb \
     --taxonomy_file data/WebOfScience/wos_tax.txt
-#    --only_test --only_test_path src/models/HBGL/models/wos/ckpt-81000 --taxonomy_file data/WebOfScience/wos_tax.txt
-
+    #--only_test --only_test_path src/models/HBGL/models/wos/ckpt-81000 --taxonomy_file data/WebOfScience/wos_tax.txt
+    
     # comment the last line ("only_test") to use in training
+    #--max_source_seq_length 509

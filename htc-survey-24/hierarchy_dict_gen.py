@@ -1,5 +1,7 @@
 import pandas as pd
 import os
+import numpy as np
+from tqdm import tqdm
 
 class TaxonomyParser():
     def __init__(self, file_path):
@@ -8,33 +10,35 @@ class TaxonomyParser():
         self.parent_nodes = set()
         self.child_to_parent = {}
         self.leaf_nodes = []
+        self.all_nodes_list = []
 
     def parse(self):
         # First pass: build parent-child relationships
         pass
 
+    # Recursive ancestor getter
+    def get_ancestors(self, node):
+        ancestors = []
+        while node in self.child_to_parent:
+            node = self.child_to_parent[node]
+            if node == "root":
+                break
+            ancestors.append(node)
+        return ancestors
+    
+
     def _build_one_hot(self):
         # Final columns order: root first, then parents in order (excluding root), then leaves in order
         internal_parents = [p for p in self.parent_nodes if p != "root"]
-        sorted_nodes = ["root"] + internal_parents + self.leaf_nodes
+        sorted_nodes = internal_parents + self.leaf_nodes #don't want root in one-hot encoding
         node_to_index = {node: idx for idx, node in enumerate(sorted_nodes)}
-
-        # Recursive ancestor getter
-        def get_ancestors(node):
-            ancestors = []
-            while node in self.child_to_parent:
-                node = self.child_to_parent[node]
-                if node == "root":
-                    break
-                ancestors.append(node)
-            return ancestors
 
         # Build one-hot for leaves only
         one_hot_dict = {}
         for leaf in self.leaf_nodes:
             vec = [0] * len(sorted_nodes)
             vec[node_to_index[leaf]] = 1
-            for ancestor in get_ancestors(leaf):
+            for ancestor in self.get_ancestors(leaf):
                 vec[node_to_index[ancestor]] = 1
             one_hot_dict[leaf] = vec
 
@@ -42,15 +46,44 @@ class TaxonomyParser():
     
     def get_one_hot(self):
         return self._build_one_hot()
+    
+    def _build_matrix(self):
+        def is_descendant(val1, val2): #only applies when val1 and val2 are different
+            #Return True if val1 is a descendant of val2
+            return val2 in self.get_ancestors(val1)
+    # Function to convert hierarchy into a matrix
+    
+        #unique_values = [f for f in self.all_nodes if f != "root"]  # Exclude root from unique values
+        
+        #return unique_values
+        mat = []
+        for i in tqdm(self.all_nodes_list):
+            for j in self.all_nodes_list:
+                mat.append(1 if is_descendant(i, j) else 0)
+        
+        mat = np.array(mat).reshape(len(self.all_nodes_list), len(self.all_nodes_list))
+        return mat
 
+    def get_matrix(self):
+        return self._build_matrix()
+    
 class AmazonTaxonomyParser(TaxonomyParser): # leaf-only lines allowed
     def parse(self):
         # First pass: build parent-child relationships
         with open(self.file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 tokens = line.strip().split()
+                tokens = [token.lower() for token in tokens]
+                
                 if not tokens:
                     continue
+
+                for token in tokens:
+                    if token == "root":
+                        continue
+                    elif token not in self.all_nodes_list:
+                        self.all_nodes_list.append(token)
+
                 if len(tokens) > 1:
                     parent = tokens[0]
                     children = tokens[1:]
@@ -70,8 +103,17 @@ class BGCParser(TaxonomyParser): # no leaf-only lines
         with open(self.file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 tokens = line.strip().split()
+                tokens = [token.lower() for token in tokens] 
+                
                 if not tokens:
                     continue
+
+                for token in tokens:
+                    if token == "root":
+                        continue
+                    elif token not in self.all_nodes_list:
+                        self.all_nodes_list.append(token)
+
                 if len(tokens) > 1:
                     parent = tokens[0]
                     children = tokens[1:]
@@ -218,13 +260,21 @@ if __name__ == "__main__":
     elif "bgc" in filename.lower() or "wos" in filename.lower():
         parser = BGCParser(taxonomy_file)
     else:
-        raise ValueError("Unsupported taxonomy file format. Use Amazon, BGC or WOS taxonomy files.")
+        raise ValueError("Unsupported taxonomy file. Use Amazon, BGC or WOS taxonomy files.")
     parser.parse()
     # Get one-hot encoding
     one_hot = parser.get_one_hot()
 
     # Save to CSV: only leaves as rows, all nodes as columns
-    output_file = f"{filename}_one_hot.csv"
-    pd.DataFrame.from_dict(one_hot, orient='index').to_csv(output_file)
+    csv_output = f"{filename}_one_hot.csv"
+    pd.DataFrame.from_dict(one_hot, orient='index').to_csv(csv_output)
 
-    print(f"Leaf-only multi-hot encoding saved to {output_file}")
+    # Run the function on the small dataset
+    #result_matrix = parser.get_matrix()
+    #print(result_matrix)
+    #np.savetxt('matrix.csv', result_matrix, delimiter=',')
+    #np.save(f"{filename}_matrix.npy", result_matrix)
+
+
+    print(f"Leaf-only multi-hot encoding saved to {csv_output}")
+    #print(f"Matrix saved to {filename}_matrix.npy")
