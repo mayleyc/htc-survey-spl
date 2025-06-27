@@ -39,20 +39,20 @@ class DatasetManager:
             self.__load_unsplit(read_bugs)
         # --- Web of Science ---
         elif dataset_name == "wos":
-            self.__load_unsplit(read_wos_dataset)
             self.ohe_csv = wos_ohe_csv
-            self.ohe = pd.read_csv(self.ohe_csv, index_col=0)  # Load the one-hot encoding CSV to ensure it exists
-
+            self.ohe = pd.read_csv(self.ohe_csv)
+            self.__load_unsplit(read_wos_dataset)
+            
         # --- Amazon ---
         elif dataset_name == "amazon":
-            self.__load_unsplit(get_amazon)
             self.ohe_csv = amz_ohe_csv
-            self.ohe = pd.read_csv(self.ohe_csv, index_col=0)
+            self.ohe = pd.read_csv(self.ohe_csv)
+            self.__load_unsplit(get_amazon)
         # --- Blurb Genre Collection ---
         elif dataset_name == "bgc":
-            self.__load_blurb()
             self.ohe_csv = bgc_ohe_csv
-            self.ohe = pd.read_csv(self.ohe_csv, index_col=0)
+            self.ohe = pd.read_csv(self.ohe_csv)
+            self.__load_blurb()
         # --- RCV1-v2 ---
         elif dataset_name == "rcv1":
             self.__load_rcv1()

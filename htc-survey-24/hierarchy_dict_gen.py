@@ -42,7 +42,7 @@ class TaxonomyParser():
                 vec[node_to_index[ancestor]] = 1
             one_hot_dict[leaf] = vec
 
-        return one_hot_dict
+        return one_hot_dict, sorted_nodes
     
     def get_one_hot(self):
         return self._build_one_hot()

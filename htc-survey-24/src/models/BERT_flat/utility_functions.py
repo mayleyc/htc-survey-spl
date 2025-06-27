@@ -32,7 +32,9 @@ from src.utils.torch_train_eval.early_stopper import EarlyStopping
 from src.utils.torch_train_eval.evaluation import MetricSet
 from src.utils.torch_train_eval.grad_accum_trainer import GradientAccumulatorTrainer
 from src.utils.torch_train_eval.trainer import Trainer
+from hierarchy_dict_gen import AmazonTaxonomyParser, BGCParser
 
+taxonomy_fp = ["data/Amazon/amazon_tax.txt", "data/BGC/bgc_tax.txt", "data/WebOfScience/wos_tax.txt"]
 
 def get_loss_function(enc_: Path, train_config: Dict, weights=None):
     champ_loss, match_loss = (train_config.get("CHAMP_LOSS", False),
@@ -49,7 +51,12 @@ def get_loss_function(enc_: Path, train_config: Dict, weights=None):
         print("Using BCE with CHAMP regularization")
     if match_loss:
         edges = set()
-        classes = mlb.classes_.tolist()
+        if "amazon" in train_config["taxonomy_path"]:
+            tax = AmazonTaxonomyParser(train_config["taxonomy_path"])
+        elif "bgc" in train_config["taxonomy_path"] or "wos" in train_config["taxonomy_path"]:   
+            tax = BGCParser(train_config["taxonomy_path"])
+        tax.parse()  
+        _, classes = tax._build_one_hot()
         with open(train_config["taxonomy_path"]) as fin:
             next(fin)  # skip first entry
             for line in fin:
