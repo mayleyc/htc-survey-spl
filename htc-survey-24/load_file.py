@@ -68,10 +68,10 @@ def merge_jsonl_files(input_files: List[Path]) -> None:
 
 if __name__ == "__main__":
     data = parse_jsonl(file)
-    #print(f"Parsed {len(data)} lines from {file}")
-    #print(f"Sample book data: \n{data[:100] if data else 'No data available'}")
-    max_length, max_texts = max_texts(data)
-    print(f"Max text length: {max_length}")
+    print(f"Parsed {len(data)} lines from {file}")
+    print(f"Sample book data: \n{data[:100] if data else 'No data available'}")
+    #max_length, max_texts = max_texts(data)
+    #print(f"Max text length: {max_length}")
     '''if max_texts:
         print(f"Sample max text: {max_texts[:5]}")  # Show first 5 max texts
     else:
