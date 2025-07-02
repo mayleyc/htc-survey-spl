@@ -51,6 +51,8 @@ def get_loss_function(enc_: Path, train_config: Dict, weights=None):
         print("Using BCE with CHAMP regularization")
     if match_loss:
         edges = set()
+        #classes = mlb.classes_.tolist()
+        # Load classes from taxonomy file instead of mlb
         if "amazon" in train_config["taxonomy_path"]:
             tax = AmazonTaxonomyParser(train_config["taxonomy_path"])
         elif "bgc" in train_config["taxonomy_path"] or "wos" in train_config["taxonomy_path"]:   

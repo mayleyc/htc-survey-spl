@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 RUN_NAME=$1
 if [ -z "$RUN_NAME" ]; then
-  RUN_NAME=wos_250617_10_mssl_509
+  RUN_NAME=wos_250702_08
 fi
 
 if [ ! -f  src/models/HBGL/data_ours/wos/wos_train.json ] || [ ! -f  src/models/HBGL/data_ours/wos/wos_dev.json ] || [ ! -f  src/models/HBGL/data_ours/wos/wos_test.json ] ; then

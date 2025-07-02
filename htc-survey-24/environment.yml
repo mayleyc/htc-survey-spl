@@ -33,7 +33,7 @@ dependencies:
       - networkx==2.8.6
       - pandas==1.4.3
       - pydot==1.4.2
-      - pygraphviz==1.10
+      #- pygraphviz==1.10
       - pyyaml==6.0
       - spacy==3.3.1
       - stop-words==2018.7.23
