@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
+
+export PYTHONPATH="/mnt/cimec-storage6/users/nguyenanhthu.tran/2025thesis/dsi-nlp-publib/htc-survey-24:$PYTHONPATH"
+
 RUN_NAME=$1
 if [ -z "$RUN_NAME" ]; then
-  RUN_NAME=bgc_250618_1_mssl_500
+  RUN_NAME=bgc_250707_1 # 0 in front means trial run, without 0 means real run
 fi
 
 if [ ! -f  src/models/HBGL/data_ours/bgc/bgc_train.json ] || [ ! -f  src/models/HBGL/data_ours/bgc/bgc_dev.json ] || [ ! -f  src/models/HBGL/data_ours/bgc/bgc_test.json ] ; then
@@ -28,13 +31,13 @@ fi
 
 python src/models/HBGL/run.py\
     --train_file ${TRAIN_FILE} --output_dir ${OUTPUT_DIR}\
-    --model_type bert --model_name_or_path bert-base-uncased --do_lower_case --max_source_seq_length 500 --max_target_seq_length 5 \
+    --model_type bert --model_name_or_path "./bert-base-uncased-local" --do_lower_case --max_source_seq_length 500 --max_target_seq_length 5 \
     --per_gpu_train_batch_size 8 --gradient_accumulation_steps 1 \
     --valid_file src/models/HBGL/data_ours/bgc/bgc_dev_generated.json \
     --test_file src/models/HBGL/data_ours/bgc/bgc_test_generated.json \
     --add_vocab_file src/models/HBGL/data_ours/bgc/label_map.pkl \
     --label_smoothing 0 \
-    --learning_rate 3e-5 --num_warmup_steps 500 --num_training_steps 96000 --cache_dir ${CACHE_DIR}\
+    --learning_rate 3e-5 --num_warmup_steps 500 --num_training_steps 960000 --cache_dir ${CACHE_DIR}\
     --random_prob 0 --keep_prob 0 --soft_label --seed ${seed} \
     --label_cpt src/models/HBGL/data_ours/bgc/bgc.taxnomy --label_cpt_not_incr_mask_ratio --label_cpt_steps 300 --label_cpt_use_bce \
     --wandb \

@@ -131,8 +131,8 @@ def _training_testing_loop(config: Dict,
         # ---------------------------------------
         save_results(results, out_folder, config)
         if save_preds:
-                pred_y_list.append(y_pred)
-                true_y_list.append(y_true)
+            pred_y_list.append(y_pred)
+            true_y_list.append(y_true)
 
     if save_preds:
         all_preds = pd.DataFrame(np.vstack(pred_y_list))
@@ -145,7 +145,7 @@ def run_configuration():
     # Paths
     config_base_path: Path = Path("config") / "BERT"
     output_path: Path = Path("dumps") / "BERT"
-    config_list: List = ["bert_amz.yml", "bert_bgc.yml", "bert_wos.yml"] #"bert_bgc.yml", "bert_wos.yml", "bert_rcv1.yml", "bert_bugs.yml", 
+    config_list: List = ["bert_amz.yml"] #, "bert_bgc.yml", "bert_wos.yml"] #"bert_bgc.yml", "bert_wos.yml", "bert_rcv1.yml", "bert_bugs.yml", 
 
     for c in config_list:
         # Prepare configuration

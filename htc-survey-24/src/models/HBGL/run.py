@@ -24,6 +24,7 @@ from transformers import BertConfig, BertTokenizer
 from s2s_ft import utils
 from s2s_ft.config import BertForSeq2SeqConfig
 
+#os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=LOGLEVEL)
@@ -215,17 +216,29 @@ def train(args, training_features, model, tokenizer):
 
     if checkpoint_state_dict:
         scheduler.load_state_dict(checkpoint_state_dict["lr_scheduler"])
-
-    train_dataset = utils.Seq2seqDatasetForBert(
-        features=training_features, max_source_len=args.max_source_seq_length,
-        max_target_len=args.max_target_seq_length, vocab_size=model.module.bert.embeddings.word_embeddings.num_embeddings, #vocab size a scalar number?
-        cls_id=tokenizer.cls_token_id, sep_id=tokenizer.sep_token_id, pad_id=tokenizer.pad_token_id,
-        mask_id=tokenizer.mask_token_id, random_prob=args.random_prob, keep_prob=args.keep_prob,
-        offset=train_batch_size * global_step, num_training_instances=train_batch_size * args.num_training_steps,
-        source_mask_prob=args.source_mask_prob, target_mask_prob=args.target_mask_prob,
-        mask_way=args.mask_way, num_max_mask_token=args.num_max_mask_token,
-        soft_label=args.soft_label,
-    )
+    
+    if hasattr(model, 'module'):
+        train_dataset = utils.Seq2seqDatasetForBert(
+            features=training_features, max_source_len=args.max_source_seq_length,
+            max_target_len=args.max_target_seq_length, vocab_size=model.module.bert.embeddings.word_embeddings.num_embeddings, #vocab size a scalar number?
+            cls_id=tokenizer.cls_token_id, sep_id=tokenizer.sep_token_id, pad_id=tokenizer.pad_token_id,
+            mask_id=tokenizer.mask_token_id, random_prob=args.random_prob, keep_prob=args.keep_prob,
+            offset=train_batch_size * global_step, num_training_instances=train_batch_size * args.num_training_steps,
+            source_mask_prob=args.source_mask_prob, target_mask_prob=args.target_mask_prob,
+            mask_way=args.mask_way, num_max_mask_token=args.num_max_mask_token,
+            soft_label=args.soft_label,
+        )
+    else:
+        train_dataset = utils.Seq2seqDatasetForBert(
+            features=training_features, max_source_len=args.max_source_seq_length,
+            max_target_len=args.max_target_seq_length, vocab_size=model.bert.embeddings.word_embeddings.num_embeddings, #vocab size a scalar number?
+            cls_id=tokenizer.cls_token_id, sep_id=tokenizer.sep_token_id, pad_id=tokenizer.pad_token_id,
+            mask_id=tokenizer.mask_token_id, random_prob=args.random_prob, keep_prob=args.keep_prob,
+            offset=train_batch_size * global_step, num_training_instances=train_batch_size * args.num_training_steps,
+            source_mask_prob=args.source_mask_prob, target_mask_prob=args.target_mask_prob,
+            mask_way=args.mask_way, num_max_mask_token=args.num_max_mask_token,
+            soft_label=args.soft_label,
+        )
 
 
     logger.info("Check dataset:")

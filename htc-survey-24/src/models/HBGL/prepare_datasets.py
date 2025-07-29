@@ -57,11 +57,11 @@ def convert_dataset(dataset_name: str, dev: float = 0.2):
     if dataset_name == "amazon":
         test_data = read_jsonl("data/Amazon/amazon_test.jsonl")
         train_data = read_jsonl("data/Amazon/amazon_train.jsonl")
-        tax_file = "data/Amazon/amazon_tax.txt"
+        tax_file = "data/Amazon/amazon_tax_old.txt"
     elif dataset_name == "bgc":
         test_data = read_jsonl("data/BGC/BlurbGenreCollection_EN_test.jsonl")
         train_data = read_jsonl("data/BGC/BlurbGenreCollection_EN_train.jsonl")
-        tax_file = "data/BGC/bgc_tax.txt"
+        tax_file = "data/BGC/bgc_tax_old.txt"
     elif dataset_name == "bugs":
         test_data = read_jsonl("data/Bugs/bugs_test.jsonl")
         train_data = read_jsonl("data/Bugs/bugs_train.jsonl")
@@ -73,7 +73,7 @@ def convert_dataset(dataset_name: str, dev: float = 0.2):
     elif dataset_name == "wos":
         test_data = read_jsonl("data/WebOfScience/wos_test.jsonl")
         train_data = read_jsonl("data/WebOfScience/wos_train.jsonl")
-        tax_file = "data/WebOfScience/wos_tax.txt"
+        tax_file = "data/WebOfScience/wos_tax_old.txt"
     else:
         raise ValueError(f"Invalid dataset '{dataset_name}'")
 
@@ -102,6 +102,7 @@ def convert_dataset(dataset_name: str, dev: float = 0.2):
 
 
 if __name__ == "__main__":
-    convert_dataset("wos")
+    #convert_dataset("wos")
     convert_dataset("bgc")
+    convert_dataset("amazon")
     

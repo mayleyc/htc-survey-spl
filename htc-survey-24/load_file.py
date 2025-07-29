@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 #file = Path("data") / "Bugs" / "linux_bugs.csv"
-file = "data/BGC/BlurbGenreCollection_EN_dev.jsonl"
+file = "dumps/BERT/bert_multilabel_AMZ_concat_cls_3/run_2025-07-09_09-35-30/all_folds_pred_2025-07-11_11-09-38.csv"
 
 _output_data = Path("data") / "Amazon" / "samples.jsonl"
 #Path("data") / "BGC" / "BlurbGenreCollection_EN_train.txt"
@@ -67,9 +67,10 @@ def merge_jsonl_files(input_files: List[Path]) -> None:
                     out_f.write(line)
 
 if __name__ == "__main__":
-    data = parse_jsonl(file)
-    print(f"Parsed {len(data)} lines from {file}")
-    print(f"Sample book data: \n{data[:100] if data else 'No data available'}")
+    data = parse_csv(file, 10)
+    
+    #print(f"Parsed {len(data)} lines from {file}")
+    #print(f"Sample book data: \n{data[:100] if data else 'No data available'}")
     #max_length, max_texts = max_texts(data)
     #print(f"Max text length: {max_length}")
     '''if max_texts:

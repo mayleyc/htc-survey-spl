@@ -107,9 +107,10 @@ def compute_hierarchical_metrics(y_true: Union[np.ndarray, List[List[str]]],
     g: Graph = read_adjlist(taxonomy_path, nodetype=str)
     assert is_tree(g), "Taxonomy file does not define a Tree, and it should :("
     assert y_pred.shape[0] == y_true.shape[0], f"Different size in pred ({y_pred.shape}) and truth ({y_true.shape})"
-    if "amazon" in str(taxonomy_path):
-            tax = AmazonTaxonomyParser(str(taxonomy_path))
-    elif "bgc" in str(taxonomy_path) or "wos" in str(taxonomy_path):   
+
+    if "amazon" in str(taxonomy_path).lower():
+        tax = AmazonTaxonomyParser(str(taxonomy_path))
+    elif "bgc" in str(taxonomy_path).lower() or "wos" in str(taxonomy_path).lower():   
         tax = BGCParser(str(taxonomy_path))
     tax.parse()  
     _, classes = tax._build_one_hot()
@@ -265,6 +266,7 @@ def transform_manual(class_to_index, y: List[List[str]], classes: List[str]) -> 
         for label in labels:
             if label in class_to_index: # checking a dictionary is faster than checking a list
                 mhe_extended[i, class_to_index[label]] = 1
+    return mhe_extended
 
 
 def h_multilabel_precision_recall_fscore(labels_true: List[List[str]], labels_pred: List[List[str]],
@@ -279,9 +281,9 @@ def h_multilabel_precision_recall_fscore(labels_true: List[List[str]], labels_pr
     :param encoder_dump_or_mapping: dump to MultiLabelBinarizer / mapping to i2v, already fitted on training set
     :return: dictionary of H-metrics
     """
-    if "amazon" in str(taxonomy_path):
+    if "amazon" in str(taxonomy_path).lower():
             tax = AmazonTaxonomyParser(str(taxonomy_path))
-    elif "bgc" in str(taxonomy_path) or "wos" in str(taxonomy_path):   
+    elif "bgc" in str(taxonomy_path).lower() or "wos" in str(taxonomy_path).lower():   
         tax = BGCParser(str(taxonomy_path))
     tax.parse()  
     _, classes = tax._build_one_hot()

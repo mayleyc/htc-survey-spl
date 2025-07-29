@@ -89,7 +89,7 @@ class DatasetManager:
         # Extract labels
         if self.objective == "multilabel":
             for label in self.labels_for_splitter:
-                matches = self.ohe[self.ohe.iloc[:, 0] == label]
+                matches = self.ohe[self.ohe.iloc[:, 0] == label.lower()]
                 one_hot_vectors = matches.iloc[:, 1:].to_numpy() #remove first column
                 if one_hot_vectors.size > 0:
                     all_labels_list.append(one_hot_vectors)  # Note: append, NOT extend
@@ -168,10 +168,31 @@ class DatasetManager:
         if self.objective == "multilabel":
             # Fit the binarizer on all labels
             label_sets = [train_labels, val_labels, test_labels]
+            
             for i, labels in enumerate(label_sets):
+                if 'Childrens-Books' in train_labels:
+                    ind = [i for i, x in enumerate(train_labels) if x == 'Childrens-Books']
+                    label_multi = []
+                    for j in ind:
+                        label_multi.append(train_labels_multi[j])
+                    print(f"childrens books in train labels:{label_multi}")
+                elif 'Childrens-Books' in test_labels:
+                    ind = [i for i, x in enumerate(test_labels) if x == 'Childrens-Books']
+                    for j in ind:
+                        label_multi.append(test_labels_multi[ind])
+                    print(f"in test labels:{label_multi}")
+                elif 'Childrens-Books' in val_labels:
+                    ind = [i for i, x in enumerate(val_labels) if x == 'Childrens-Books']
+                    for j in ind:
+                        label_multi.append(val_labels_multi[ind])
+                    print(f"in val labels:{label_multi}")
+                
+                quit()
+
+
                 all_labels_list = list()
                 for label in labels:
-                    matches = self.ohe[self.ohe.iloc[:, 0] == label]
+                    matches = self.ohe[self.ohe.iloc[:, 0] == label.lower()]
                     one_hot_vectors = matches.iloc[:, 1:].to_numpy() #remove first column
                     if one_hot_vectors.size > 0:
                         all_labels_list.append(one_hot_vectors)  # Note: append, NOT extend

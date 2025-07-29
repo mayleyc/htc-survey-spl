@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
+export PYTHONPATH="/mnt/cimec-storage6/users/nguyenanhthu.tran/2025thesis/dsi-nlp-publib/htc-survey-24:$PYTHONPATH"
+
+
 RUN_NAME=$1
 if [ -z "$RUN_NAME" ]; then
-  RUN_NAME=wos_250702_08
+  RUN_NAME=wos_250708_3 # 0 in front means trial run, without 0 means real run
 fi
 
 if [ ! -f  src/models/HBGL/data_ours/wos/wos_train.json ] || [ ! -f  src/models/HBGL/data_ours/wos/wos_dev.json ] || [ ! -f  src/models/HBGL/data_ours/wos/wos_test.json ] ; then
@@ -20,7 +23,7 @@ if [ -d $OUTPUT_DIR ]; then
 fi
 
 # EDIT PYTHONPATH WITH MAIN FOLDER PATH
-#export PYTHONPATH=$PYTHONPATH:/home/alessandro/work/repo/htc-survey
+export PYTHONPATH=$PYTHONPATH:/mnt/cimec-storage6/users/nguyenanhthu.tran/2025thesis/dsi-nlp-publib/htc-survey-24
 
 if [ ! -f $TRAIN_FILE ]; then
   python src/models/HBGL/preprocess.py wos
@@ -28,7 +31,7 @@ fi
 
 python src/models/HBGL/run.py\
     --train_file ${TRAIN_FILE} --output_dir ${OUTPUT_DIR}\
-    --model_type bert --model_name_or_path bert-base-uncased --do_lower_case --max_source_seq_length 509 --max_target_seq_length 3 \
+    --model_type bert --model_name_or_path "./bert-base-uncased-local" --do_lower_case --max_source_seq_length 509 --max_target_seq_length 3 \
     --per_gpu_train_batch_size 8 --gradient_accumulation_steps 1 \
     --valid_file src/models/HBGL/data_ours/wos/wos_dev_generated.json \
     --test_file src/models/HBGL/data_ours/wos/wos_test_generated.json \
@@ -38,8 +41,8 @@ python src/models/HBGL/run.py\
     --random_prob 0 --keep_prob 0 --soft_label --seed ${seed} \
     --label_cpt src/models/HBGL/data_ours/wos/wos.taxnomy --label_cpt_not_incr_mask_ratio --label_cpt_steps 300 --label_cpt_use_bce \
     --wandb \
-    --taxonomy_file data/WebOfScience/wos_tax.txt
-    #--only_test --only_test_path src/models/HBGL/models/wos/ckpt-81000 --taxonomy_file data/WebOfScience/wos_tax.txt
+    --taxonomy_file data/WebOfScience/wos_tax.txt \
+    --only_test --only_test_path src/models/HBGL/models/wos_250703_2_960000ep/ckpt-793500 --taxonomy_file data/WebOfScience/wos_tax.txt
     
     # comment the last line ("only_test") to use in training
     #--max_source_seq_length 509

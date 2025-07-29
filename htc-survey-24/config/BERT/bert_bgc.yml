@@ -41,4 +41,4 @@ PATH_TO_RELOAD: "dumps/BERT/bert_multilabel_BGC_concat_cls_3" # Path to run fold
 EPOCH_RELOAD: 3 # Epoch to load (comment to reload the last one)
 
 stratifiedCV: 2 #3
-n_repeats:  1 #2
+n_repeats: 1 #2

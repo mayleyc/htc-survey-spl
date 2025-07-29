@@ -73,7 +73,6 @@ class AmazonTaxonomyParser(TaxonomyParser): # leaf-only lines allowed
         with open(self.file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 tokens = line.strip().split()
-                tokens = [token.lower() for token in tokens]
                 
                 if not tokens:
                     continue
@@ -103,8 +102,7 @@ class BGCParser(TaxonomyParser): # no leaf-only lines
         with open(self.file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 tokens = line.strip().split()
-                tokens = [token.lower() for token in tokens] 
-                
+                 
                 if not tokens:
                     continue
 
@@ -117,17 +115,37 @@ class BGCParser(TaxonomyParser): # no leaf-only lines
                 if len(tokens) > 1:
                     parent = tokens[0]
                     children = tokens[1:]
+                    leaf = tokens[-1]
 
                     self.parent_nodes.add(parent)
                     self.all_nodes.add(parent)
                     self.all_nodes.update(children)
+                    self.leaf_nodes.append(leaf)
 
                     for child in children:
                         self.child_to_parent[child] = parent
                 else:
                     continue
 
-        self.leaf_nodes = [p for p in self.all_nodes if p not in self.parent_nodes]
+        self.leaf_nodes = [p for p in self.all_nodes if p != "root"] #not in self.parent_nodes] #
+
+    def _build_one_hot(self): # all are leaves for BGC
+        # Final columns order: root first, then parents in order (excluding root), then leaves in order
+        node_to_index = {node: idx for idx, node in enumerate(self.leaf_nodes)}
+
+        # Build one-hot for leaves only
+        one_hot_dict = {}
+        for leaf in self.leaf_nodes:
+            vec = [0] * len(self.leaf_nodes)
+            vec[node_to_index[leaf]] = 1
+            for ancestor in self.get_ancestors(leaf):
+                vec[node_to_index[ancestor]] = 1
+            one_hot_dict[leaf] = vec
+
+        return one_hot_dict, self.leaf_nodes
+    
+    def get_one_hot(self):
+        return self._build_one_hot()
 
 '''def parse_taxonomy_amz(file_path):
     all_nodes = set()
@@ -252,7 +270,7 @@ def find_taxonomy_files(base_dir="dataset"):
 # Example usage
 if __name__ == "__main__":
     # Replace with taxonomy file path
-    taxonomy_file = "data/Amazon/amazon_tax.txt"
+    taxonomy_file = "data/WebOfScience/wos_tax.txt" #"data/BGC/bgc_tax.txt" #"data/Amazon/amazon_tax.txt"
     filename = taxonomy_file.split("/")[-1].split(".")[0]
 
     if "amazon" in filename.lower():
@@ -263,7 +281,7 @@ if __name__ == "__main__":
         raise ValueError("Unsupported taxonomy file. Use Amazon, BGC or WOS taxonomy files.")
     parser.parse()
     # Get one-hot encoding
-    one_hot = parser.get_one_hot()
+    one_hot, _ = parser.get_one_hot()
 
     # Save to CSV: only leaves as rows, all nodes as columns
     csv_output = f"{filename}_one_hot.csv"
